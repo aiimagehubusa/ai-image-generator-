@@ -2,247 +2,284 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Free AI Image Generator USA – No API | AI Image Hub USA</title>
-<meta name="description" content="Free AI image generator for USA users. Create AI images for Facebook, Instagram, Etsy, blogs. No API, no login.">
-<meta name="keywords" content="free ai image generator usa, ai images for facebook, ai images for instagram, coloring page ai, etsy coloring, pinterest ai images">
+<title>AI Image Generator – Free, No API | AI Image Hub</title>
+
+<meta name="description" content="100% Free AI Image Generator. No API, no login. Generate, crop, download & share HD images instantly.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
-body{
-margin:0;
-font-family:Inter,Arial,sans-serif;
-background:radial-gradient(circle at top,#020617,#000);
-color:#fff;
-text-align:center;
+body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b0b0f;color:#fff;text-align:center}
+
+/* HEADER */
+header{
+position:sticky;top:0;z-index:99;
+background:#020617;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 20px;
+border-bottom:1px solid #111;
 }
-.container{max-width:780px;margin:auto;padding:24px;}
-h1{font-size:34px;margin-bottom:6px;}
-p{color:#94a3b8;}
+.logo{
+font-size:22px;
+font-weight:800;
+letter-spacing:1px;
+color:#fb923c;
+animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-4px)}
+}
+nav a{
+margin-left:14px;
+color:#cbd5f5;
+text-decoration:none;
+font-weight:600;
+font-size:14px;
+}
+nav a:hover{color:#fb923c}
+
+/* MAIN */
+.container{max-width:900px;margin:auto;padding:26px}
+h1{font-size:36px}
+p{color:#a1a1aa}
 
 input,select{
-width:100%;padding:14px;margin-top:12px;
-border-radius:14px;border:none;font-size:16px;
+width:100%;
+padding:14px;
+margin-top:12px;
+border-radius:14px;
+border:none;
+font-size:16px
 }
-
-.styles{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
-.style-btn{padding:10px 18px;border-radius:30px;border:none;background:#1e293b;color:#e5e7eb;cursor:pointer;}
-.style-btn.active,.style-btn:hover{background:#7c3aed;}
 
 .gen{
-margin-top:20px;padding:16px 38px;border:none;
-border-radius:50px;font-size:18px;font-weight:bold;
+margin-top:22px;
+padding:18px 44px;
+border:none;
+border-radius:50px;
+font-size:19px;
+font-weight:700;
 cursor:pointer;
-background:linear-gradient(135deg,#22c55e,#4ade80);
-color:#022c22;
-box-shadow:0 0 25px rgba(34,197,94,.4);
-animation:pulse 2s infinite;
+background:linear-gradient(135deg,#f97316,#fb923c);
+color:#000;
+transition:.2s;
 }
-@keyframes pulse{
-0%{box-shadow:0 0 0 0 rgba(34,197,94,.6);}
-70%{box-shadow:0 0 0 18px rgba(34,197,94,0);}
-100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
+.gen:hover{transform:scale(1.05)}
+
+.loader{display:none;color:#fb923c;margin-top:15px}
+
+img{max-width:100%;border-radius:18px;margin-top:26px}
+
+.actions button{
+margin:8px;
+padding:12px 22px;
+border:none;
+border-radius:14px;
+font-size:14px;
+font-weight:600;
+cursor:pointer;
+}
+.crop{background:#38bdf8;color:#002}
+.dl{background:#22c55e;color:#022c22}
+
+/* PROMPTS */
+.suggestions span{
+display:inline-block;
+background:#1f2933;
+margin:6px;
+padding:8px 14px;
+border-radius:20px;
+cursor:pointer;
+font-size:14px;
 }
 
-.loader{display:none;margin-top:18px;color:#38bdf8;}
-img{max-width:100%;border-radius:18px;margin-top:20px;}
-.dl{
-margin:10px;padding:12px 22px;border:none;border-radius:14px;
-background:linear-gradient(135deg,#3b82f6,#60a5fa);
-color:#fff;cursor:pointer;
+/* SHARE */
+.share button{
+margin:6px;
+padding:10px 16px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+font-weight:600;
+}
+.fb{background:#1877f2;color:#fff}
+.wa{background:#25d366;color:#022}
+.pin{background:#e60023;color:#fff}
+.ig{background:#f472b6;color:#000}
+
+/* TRUST */
+.trust{
+margin-top:30px;
+background:#111827;
+padding:20px;
+border-radius:18px;
+font-size:15px;
+color:#c7d2fe
 }
 
-.suggest{margin-top:18px;}
-.suggest button{
-margin:6px;padding:8px 14px;border-radius:20px;
-border:none;background:#334155;color:#fff;cursor:pointer;
+/* FOOTER */
+footer{
+margin-top:50px;
+padding:30px;
+background:#020617;
+font-size:14px;
+color:#9ca3af
 }
-
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
-
-.banner{
-margin-top:30px;padding:18px;
-background:linear-gradient(135deg,#f59e0b,#facc15);
-color:#000;border-radius:18px;
+footer a{
+color:#fb923c;
+margin:0 8px;
+text-decoration:none;
+font-weight:600
 }
 
 /* EMAIL POPUP */
-#emailPopup{
+.popup{
 display:none;
-position:fixed;top:0;left:0;width:100%;height:100%;
-background:rgba(0,0,0,0.85);z-index:1000;
-justify-content:center;align-items:center;
+position:fixed;
+bottom:20px;
+right:20px;
+background:#020617;
+padding:20px;
+border-radius:16px;
+max-width:280px;
+box-shadow:0 0 30px rgba(0,0,0,.6);
 }
-#emailPopup .popup-content{
-background:#0f172a;padding:30px;border-radius:18px;text-align:center;
-max-width:400px;color:#fff;
+.popup button{
+margin-top:10px;
+padding:10px;
+border:none;
+border-radius:10px;
+background:#f97316;
+font-weight:700;
 }
-#emailPopup input{
-width:90%;margin:10px 0;padding:12px;border-radius:12px;border:none;font-size:16px;
-}
-#emailPopup button{
-padding:12px 24px;border-radius:14px;background:#22c55e;color:#022c22;font-weight:bold;border:none;cursor:pointer;
-}
-
-/* PINTEREST BUTTON */
-.pinterest-btn{
-margin-top:15px;padding:10px 16px;border-radius:14px;
-background:#E60023;color:#fff;border:none;cursor:pointer;font-weight:bold;
-}
-footer{margin-top:40px;font-size:14px;opacity:.7;}
+.close{float:right;cursor:pointer;color:#fb923c}
 </style>
 </head>
 
 <body>
+
+<header>
+<div class="logo">AIImageHub</div>
+<nav>
+<a href="#">Home</a>
+<a href="#about">About</a>
+<a href="#privacy">Privacy</a>
+<a href="#contact">Contact</a>
+</nav>
+</header>
+
 <div class="container">
 
-<h1>🇺🇸 Free AI Image Generator</h1>
-<p>No API • No Login • Facebook • Instagram • Etsy Ready</p>
+<h1>Free AI Image Generator</h1>
+<p>Create • Crop • Download • Share HD images</p>
 
-<input id="prompt" placeholder="Describe your image idea…" />
+<input id="prompt" placeholder="Describe your image idea..." />
 
-<!-- PROMPT SUGGESTIONS -->
-<div class="suggest">
-<strong>Try:</strong>
-<button onclick="fill('cute unicorn coloring page, black and white')">🦄 Coloring</button>
-<button onclick="fill('anime girl illustration, vibrant colors')">🎨 Anime</button>
-<button onclick="fill('photorealistic modern living room')">📸 Photo</button>
-<button onclick="fill('product mockup on white background')">🛍️ Mockup</button>
+<div class="suggestions">
+<span onclick="fill('cute unicorn coloring page black and white')">🦄 Coloring</span>
+<span onclick="fill('minimal logo design modern ai')">🎨 Logo</span>
+<span onclick="fill('instagram post business promotion')">📸 Instagram</span>
+<span onclick="fill('etsy printable wall art boho')">🛍 Etsy</span>
 </div>
 
-<!-- STYLE -->
-<div class="styles">
-<button class="style-btn active" onclick="setStyle('photo')">📸 Photo</button>
-<button class="style-btn" onclick="setStyle('anime')">🎨 Anime</button>
-<button class="style-btn" onclick="setStyle('coloring')">✏️ Coloring</button>
-</div>
-
-<!-- OPTIONS -->
 <select id="ratio">
-<option value="1:1">Instagram Post (1:1)</option>
-<option value="9:16">Instagram Reel / Story (9:16)</option>
-<option value="16:9">YouTube / Facebook Cover (16:9)</option>
+<option value="1:1">Instagram (1:1)</option>
+<option value="9:16">Reels / Story (9:16)</option>
+<option value="16:9">YouTube Cover (16:9)</option>
 </select>
 
-<select id="size">
-<option value="512">512×512 (Fast)</option>
-<option value="768">768×768 (HD)</option>
-<option value="1024">1024×1024 (Ultra HD – Etsy)</option>
-</select>
+<button class="gen" onclick="generate()">Generate Image</button>
+<div class="loader" id="load">⏳ Generating…</div>
 
-<select id="count">
-<option value="1">1 Image</option>
-<option value="2">2 Images</option>
-<option value="4">4 Images</option>
-</select>
+<div id="output"></div>
 
-<button class="gen" onclick="generate()">✨ Generate Image</button>
-
-<div class="loader" id="load">⏳ Generating images…</div>
-
-<div id="output" class="grid"></div>
-
-<!-- ETSY AFFILIATE -->
-<div class="banner">
-<strong>💰 Want to sell these images?</strong><br>
-Create coloring books & mockups and sell on Etsy.<br>
-<a href="https://www.etsy.com/" target="_blank"><b>Start Selling on Etsy →</b></a>
+<div class="share" id="share" style="display:none">
+<button class="fb" onclick="shareFB()">Facebook</button>
+<button class="wa" onclick="shareWA()">WhatsApp</button>
+<button class="pin" onclick="pin()">Pinterest</button>
+<button class="ig" onclick="shareIG()">Instagram</button>
 </div>
 
-<!-- PINTEREST SHARE -->
-<button class="pinterest-btn" onclick="sharePinterest()">📌 Share on Pinterest</button>
-
-<!-- EMAIL POPUP -->
-<div id="emailPopup">
-<div class="popup-content">
-<h2>Join Our Newsletter</h2>
-<p>Get free AI prompts & tips!</p>
-<input type="email" id="emailInput" placeholder="Enter your email">
-<br>
-<button onclick="submitEmail()">Subscribe</button>
-<br><br>
-<button onclick="closePopup()">Cancel</button>
+<div class="trust">
+✔ No API • ✔ No Login • ✔ 100% Free • ✔ GitHub CDN Fast
 </div>
+
 </div>
 
 <footer>
-Powered by Pollinations.ai • AIImageHubUSA • 100% Free • No API
+<a id="about">About</a> |
+<a id="privacy">Privacy</a> |
+<a id="contact">Contact</a>
+<br><br>
+© 2026 AIImageHub
 </footer>
 
+<!-- EMAIL -->
+<div class="popup" id="popup">
+<span class="close" onclick="closePopup()">✖</span>
+<h4>Free AI Tips</h4>
+<p>Get prompts & updates</p>
+<button onclick="closePopup()">Notify Me</button>
 </div>
 
 <script>
-// GLOBAL
-let style="photorealistic";
+let imgURL="";
 
-// PROMPT SUGGESTION
-function fill(t){document.getElementById("prompt").value=t;}
+function fill(t){prompt.value=t}
 
-// STYLE BUTTON
-function setStyle(s){
-style=s;
-document.querySelectorAll('.style-btn').forEach(b=>b.classList.remove('active'));
-event.target.classList.add('active');
-}
-
-// GENERATE MULTI-IMAGE
 function generate(){
-const p=document.getElementById("prompt").value;
-const r=document.getElementById("ratio").value;
-const size=document.getElementById("size").value;
-const c=document.getElementById("count").value;
-if(!p){alert("Write an image idea");return;}
+if(!prompt.value) return alert("Write image idea");
+load.style.display="block";
+imgURL="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt.value+" aspect ratio "+ratio.value+" high quality");
 
-let styleText="";
-if(style==="anime") styleText="anime illustration, vibrant colors";
-if(style==="coloring") styleText="black and white line art coloring page";
-if(style==="photo") styleText="photorealistic, ultra realistic";
-
-document.getElementById("load").style.display="block";
-document.getElementById("output").innerHTML="";
-
-for(let i=0;i<c;i++){
-let url="https://image.pollinations.ai/prompt/"
-+encodeURIComponent(p+", "+styleText+", aspect ratio "+r)
-+"?width="+size+"&height="+size+"&seed="+Math.random();
-
-document.getElementById("output").innerHTML+=
-`<div>
-<img src="${url}" loading="lazy">
-<br>
-<button class="dl" onclick="download('${url}')">⬇ Download</button>
+output.innerHTML=`
+<img id="genImg" src="${imgURL}">
+<div class="actions">
+<button class="crop" onclick="crop()">✂ Crop</button>
+<button class="dl" onclick="download()">⬇ Download</button>
 </div>`;
-}
-document.getElementById("load").style.display="none";
+share.style.display="block";
+setTimeout(()=>load.style.display="none",1200);
 }
 
-// DOWNLOAD
-function download(u){
+function crop(){
+const img=genImg;
+const c=document.createElement("canvas");
+c.width=img.naturalWidth;
+c.height=img.naturalHeight-60;
+c.getContext("2d").drawImage(img,0,0);
+img.src=c.toDataURL("image/png");
+}
+
+function download(){
 const a=document.createElement("a");
-a.href=u;
-a.download="ai-image.png";
+a.href=genImg.src;
+a.download="aiimagehub.png";
 a.click();
 }
 
-// EMAIL POPUP
-setTimeout(()=>{document.getElementById("emailPopup").style.display="flex";},15000);
-function closePopup(){document.getElementById("emailPopup").style.display="none";}
-function submitEmail(){
-let e=document.getElementById("emailInput").value;
-if(!e){alert("Enter email");return;}
-alert("Thanks! We'll send tips & prompts to: "+e);
-closePopup();
+function pin(){
+window.open(
+`https://pinterest.com/pin/create/button/?url=${location.href}&media=${genImg.src}&description=${prompt.value}`,
+"_blank");
 }
 
-// PINTEREST SHARE
-function sharePinterest(){
-const p=document.getElementById("prompt").value || "AI Image";
-const url=encodeURIComponent(window.location.href);
-const media=encodeURIComponent(document.querySelector('#output img')?.src||"");
-window.open(`https://pinterest.com/pin/create/button/?url=${url}&media=${media}&description=${p}`, '_blank');
+function shareFB(){
+window.open(`https://www.facebook.com/sharer/sharer.php?u=${location.href}`,"_blank");
 }
+function shareWA(){
+window.open(`https://wa.me/?text=${encodeURIComponent(prompt.value+" "+location.href)}`,"_blank");
+}
+function shareIG(){
+alert("Download image and upload to Instagram app.");
+}
+
+setTimeout(()=>popup.style.display="block",8000);
+function closePopup(){popup.style.display="none"}
 </script>
 
 </body>
