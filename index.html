@@ -2,39 +2,70 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Free AI Image Generator (No API) | USA</title>
-<meta name="description" content="Free AI Image Generator for USA users. No API, no signup, unlimited image generation.">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Free AI Image Generator USA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="100% Free AI Image Generator for USA users. No API, no signup. Create images instantly using AI.">
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background:#0f172a;
+  color:#fff;
+  text-align:center;
+  padding:20px;
+}
+input {
+  width:90%;
+  max-width:500px;
+  padding:12px;
+  font-size:16px;
+  border-radius:8px;
+  border:none;
+}
+button {
+  margin-top:12px;
+  padding:12px 24px;
+  font-size:18px;
+  background:#22c55e;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+img {
+  margin-top:20px;
+  max-width:90%;
+  border-radius:12px;
+}
+footer {
+  margin-top:40px;
+  font-size:14px;
+  opacity:0.7;
+}
+</style>
 </head>
+<body>
 
-<body style="font-family:Arial;max-width:720px;margin:auto;padding:20px;background:#f9fafb">
+<h1>🖼️ Free AI Image Generator</h1>
+<p>USA Users • No API • 100% Free</p>
 
-<h1>Free AI Image Generator (No API)</h1>
-<p>Create AI images instantly. 100% free and no API required.</p>
+<input id="prompt" placeholder="Type your image prompt..." />
+<br>
+<button onclick="generate()">Generate Image</button>
 
-<input id="prompt" placeholder="Type your image idea here" style="width:100%;padding:12px;font-size:16px">
+<div id="output"></div>
 
-<br><br>
-
-<button onclick="gen()" style="padding:12px 25px;font-size:16px;border-radius:8px;background:#2563eb;color:white;border:none">
-Generate Image
-</button>
-
-<br><br>
-
-<img id="img" style="width:100%;border-radius:10px">
+<footer>
+Powered by Pollinations.ai • aiimagehubusa
+</footer>
 
 <script>
-function gen(){
-  let p = document.getElementById("prompt").value;
-  document.getElementById("img").src =
-  "https://image.pollinations.ai/prompt/" + encodeURIComponent(p);
+function generate() {
+  const prompt = document.getElementById("prompt").value;
+  if (!prompt) return alert("Please type a prompt");
+  const url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
+  document.getElementById("output").innerHTML =
+    `<img src="${url}" alt="AI Image">`;
 }
 </script>
-
-<p style="margin-top:30px;font-size:14px;color:#555">
-No API • Unlimited • Powered by Pollinations
-</p>
 
 </body>
 </html>
