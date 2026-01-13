@@ -2,68 +2,246 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Free AI Image Generator USA</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="100% Free AI Image Generator for USA users. No API, no signup. Create images instantly using AI.">
+<title>Free AI Image Generator USA – No API | AI Image Hub USA</title>
+<meta name="description" content="Free AI image generator for USA users. Create AI images for Facebook, Instagram, Etsy, blogs. No API, no login.">
+<meta name="keywords" content="free ai image generator usa, ai images for facebook, ai images for instagram, coloring page ai, etsy coloring, pinterest ai images">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-body {
-  font-family: Arial, sans-serif;
-  background:#0f172a;
-  color:#fff;
-  text-align:center;
-  padding:20px;
+body{
+margin:0;
+font-family:Inter,Arial,sans-serif;
+background:radial-gradient(circle at top,#020617,#000);
+color:#fff;
+text-align:center;
 }
-input {
-  width:90%;
-  max-width:500px;
-  padding:12px;
-  font-size:16px;
-  border-radius:8px;
-  border:none;
+.container{max-width:780px;margin:auto;padding:24px;}
+h1{font-size:34px;margin-bottom:6px;}
+p{color:#94a3b8;}
+
+input,select{
+width:100%;padding:14px;margin-top:12px;
+border-radius:14px;border:none;font-size:16px;
 }
-button {
-  margin-top:12px;
-  padding:12px 24px;
-  font-size:18px;
-  background:#22c55e;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
+
+.styles{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px;}
+.style-btn{padding:10px 18px;border-radius:30px;border:none;background:#1e293b;color:#e5e7eb;cursor:pointer;}
+.style-btn.active,.style-btn:hover{background:#7c3aed;}
+
+.gen{
+margin-top:20px;padding:16px 38px;border:none;
+border-radius:50px;font-size:18px;font-weight:bold;
+cursor:pointer;
+background:linear-gradient(135deg,#22c55e,#4ade80);
+color:#022c22;
+box-shadow:0 0 25px rgba(34,197,94,.4);
+animation:pulse 2s infinite;
 }
-img {
-  margin-top:20px;
-  max-width:90%;
-  border-radius:12px;
+@keyframes pulse{
+0%{box-shadow:0 0 0 0 rgba(34,197,94,.6);}
+70%{box-shadow:0 0 0 18px rgba(34,197,94,0);}
+100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}
 }
-footer {
-  margin-top:40px;
-  font-size:14px;
-  opacity:0.7;
+
+.loader{display:none;margin-top:18px;color:#38bdf8;}
+img{max-width:100%;border-radius:18px;margin-top:20px;}
+.dl{
+margin:10px;padding:12px 22px;border:none;border-radius:14px;
+background:linear-gradient(135deg,#3b82f6,#60a5fa);
+color:#fff;cursor:pointer;
 }
+
+.suggest{margin-top:18px;}
+.suggest button{
+margin:6px;padding:8px 14px;border-radius:20px;
+border:none;background:#334155;color:#fff;cursor:pointer;
+}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:14px;}
+
+.banner{
+margin-top:30px;padding:18px;
+background:linear-gradient(135deg,#f59e0b,#facc15);
+color:#000;border-radius:18px;
+}
+
+/* EMAIL POPUP */
+#emailPopup{
+display:none;
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.85);z-index:1000;
+justify-content:center;align-items:center;
+}
+#emailPopup .popup-content{
+background:#0f172a;padding:30px;border-radius:18px;text-align:center;
+max-width:400px;color:#fff;
+}
+#emailPopup input{
+width:90%;margin:10px 0;padding:12px;border-radius:12px;border:none;font-size:16px;
+}
+#emailPopup button{
+padding:12px 24px;border-radius:14px;background:#22c55e;color:#022c22;font-weight:bold;border:none;cursor:pointer;
+}
+
+/* PINTEREST BUTTON */
+.pinterest-btn{
+margin-top:15px;padding:10px 16px;border-radius:14px;
+background:#E60023;color:#fff;border:none;cursor:pointer;font-weight:bold;
+}
+footer{margin-top:40px;font-size:14px;opacity:.7;}
 </style>
 </head>
+
 <body>
+<div class="container">
 
-<h1>🖼️ Free AI Image Generator</h1>
-<p>USA Users • No API • 100% Free</p>
+<h1>🇺🇸 Free AI Image Generator</h1>
+<p>No API • No Login • Facebook • Instagram • Etsy Ready</p>
 
-<input id="prompt" placeholder="Type your image prompt..." />
+<input id="prompt" placeholder="Describe your image idea…" />
+
+<!-- PROMPT SUGGESTIONS -->
+<div class="suggest">
+<strong>Try:</strong>
+<button onclick="fill('cute unicorn coloring page, black and white')">🦄 Coloring</button>
+<button onclick="fill('anime girl illustration, vibrant colors')">🎨 Anime</button>
+<button onclick="fill('photorealistic modern living room')">📸 Photo</button>
+<button onclick="fill('product mockup on white background')">🛍️ Mockup</button>
+</div>
+
+<!-- STYLE -->
+<div class="styles">
+<button class="style-btn active" onclick="setStyle('photo')">📸 Photo</button>
+<button class="style-btn" onclick="setStyle('anime')">🎨 Anime</button>
+<button class="style-btn" onclick="setStyle('coloring')">✏️ Coloring</button>
+</div>
+
+<!-- OPTIONS -->
+<select id="ratio">
+<option value="1:1">Instagram Post (1:1)</option>
+<option value="9:16">Instagram Reel / Story (9:16)</option>
+<option value="16:9">YouTube / Facebook Cover (16:9)</option>
+</select>
+
+<select id="size">
+<option value="512">512×512 (Fast)</option>
+<option value="768">768×768 (HD)</option>
+<option value="1024">1024×1024 (Ultra HD – Etsy)</option>
+</select>
+
+<select id="count">
+<option value="1">1 Image</option>
+<option value="2">2 Images</option>
+<option value="4">4 Images</option>
+</select>
+
+<button class="gen" onclick="generate()">✨ Generate Image</button>
+
+<div class="loader" id="load">⏳ Generating images…</div>
+
+<div id="output" class="grid"></div>
+
+<!-- ETSY AFFILIATE -->
+<div class="banner">
+<strong>💰 Want to sell these images?</strong><br>
+Create coloring books & mockups and sell on Etsy.<br>
+<a href="https://www.etsy.com/" target="_blank"><b>Start Selling on Etsy →</b></a>
+</div>
+
+<!-- PINTEREST SHARE -->
+<button class="pinterest-btn" onclick="sharePinterest()">📌 Share on Pinterest</button>
+
+<!-- EMAIL POPUP -->
+<div id="emailPopup">
+<div class="popup-content">
+<h2>Join Our Newsletter</h2>
+<p>Get free AI prompts & tips!</p>
+<input type="email" id="emailInput" placeholder="Enter your email">
 <br>
-<button onclick="generate()">Generate Image</button>
-
-<div id="output"></div>
+<button onclick="submitEmail()">Subscribe</button>
+<br><br>
+<button onclick="closePopup()">Cancel</button>
+</div>
+</div>
 
 <footer>
-Powered by Pollinations.ai • aiimagehubusa
+Powered by Pollinations.ai • AIImageHubUSA • 100% Free • No API
 </footer>
 
+</div>
+
 <script>
-function generate() {
-  const prompt = document.getElementById("prompt").value;
-  if (!prompt) return alert("Please type a prompt");
-  const url = "https://image.pollinations.ai/prompt/" + encodeURIComponent(prompt);
-  document.getElementById("output").innerHTML =
-    `<img src="${url}" alt="AI Image">`;
+// GLOBAL
+let style="photorealistic";
+
+// PROMPT SUGGESTION
+function fill(t){document.getElementById("prompt").value=t;}
+
+// STYLE BUTTON
+function setStyle(s){
+style=s;
+document.querySelectorAll('.style-btn').forEach(b=>b.classList.remove('active'));
+event.target.classList.add('active');
+}
+
+// GENERATE MULTI-IMAGE
+function generate(){
+const p=document.getElementById("prompt").value;
+const r=document.getElementById("ratio").value;
+const size=document.getElementById("size").value;
+const c=document.getElementById("count").value;
+if(!p){alert("Write an image idea");return;}
+
+let styleText="";
+if(style==="anime") styleText="anime illustration, vibrant colors";
+if(style==="coloring") styleText="black and white line art coloring page";
+if(style==="photo") styleText="photorealistic, ultra realistic";
+
+document.getElementById("load").style.display="block";
+document.getElementById("output").innerHTML="";
+
+for(let i=0;i<c;i++){
+let url="https://image.pollinations.ai/prompt/"
++encodeURIComponent(p+", "+styleText+", aspect ratio "+r)
++"?width="+size+"&height="+size+"&seed="+Math.random();
+
+document.getElementById("output").innerHTML+=
+`<div>
+<img src="${url}" loading="lazy">
+<br>
+<button class="dl" onclick="download('${url}')">⬇ Download</button>
+</div>`;
+}
+document.getElementById("load").style.display="none";
+}
+
+// DOWNLOAD
+function download(u){
+const a=document.createElement("a");
+a.href=u;
+a.download="ai-image.png";
+a.click();
+}
+
+// EMAIL POPUP
+setTimeout(()=>{document.getElementById("emailPopup").style.display="flex";},15000);
+function closePopup(){document.getElementById("emailPopup").style.display="none";}
+function submitEmail(){
+let e=document.getElementById("emailInput").value;
+if(!e){alert("Enter email");return;}
+alert("Thanks! We'll send tips & prompts to: "+e);
+closePopup();
+}
+
+// PINTEREST SHARE
+function sharePinterest(){
+const p=document.getElementById("prompt").value || "AI Image";
+const url=encodeURIComponent(window.location.href);
+const media=encodeURIComponent(document.querySelector('#output img')?.src||"");
+window.open(`https://pinterest.com/pin/create/button/?url=${url}&media=${media}&description=${p}`, '_blank');
 }
 </script>
 
