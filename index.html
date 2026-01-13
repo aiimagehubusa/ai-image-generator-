@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Free AI Image Generator (No API) | USA</title>
+<meta name="description" content="Free AI Image Generator for USA users. No API, no signup, unlimited image generation.">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body style="font-family:Arial;max-width:720px;margin:auto;padding:20px;background:#f9fafb">
+
+<h1>Free AI Image Generator (No API)</h1>
+<p>Create AI images instantly. 100% free and no API required.</p>
+
+<input id="prompt" placeholder="Type your image idea here" style="width:100%;padding:12px;font-size:16px">
+
+<br><br>
+
+<button onclick="gen()" style="padding:12px 25px;font-size:16px;border-radius:8px;background:#2563eb;color:white;border:none">
+Generate Image
+</button>
+
+<br><br>
+
+<img id="img" style="width:100%;border-radius:10px">
+
+<script>
+function gen(){
+  let p = document.getElementById("prompt").value;
+  document.getElementById("img").src =
+  "https://image.pollinations.ai/prompt/" + encodeURIComponent(p);
+}
+</script>
+
+<p style="margin-top:30px;font-size:14px;color:#555">
+No API • Unlimited • Powered by Pollinations
+</p>
+
+</body>
+</html>
