@@ -4,89 +4,35 @@
 <meta charset="UTF-8">
 <title>AI Image Generator – Free, No API | AI Image Hub</title>
 
-<meta name="description" content="100% Free AI Image Generator. No API, no login. Generate, crop, download & share HD images instantly.">
+<meta name="description" content="100% Free AI Image Generator. No API, no login. Generate, crop & download HD images instantly.">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
+<!-- CropperJS -->
+<link rel="stylesheet" href="https://unpkg.com/cropperjs/dist/cropper.min.css">
+<script src="https://unpkg.com/cropperjs/dist/cropper.min.js"></script>
+
 <style>
 body{margin:0;font-family:Inter,Arial,sans-serif;background:#0b0b0f;color:#fff;text-align:center}
-
-/* HEADER */
-header{
-position:sticky;top:0;z-index:99;
-background:#020617;
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:12px 20px;
-border-bottom:1px solid #111;
-}
-.logo{
-font-size:22px;
-font-weight:800;
-letter-spacing:1px;
-color:#fb923c;
-animation:float 3s ease-in-out infinite;
-}
-@keyframes float{
-0%,100%{transform:translateY(0)}
-50%{transform:translateY(-4px)}
-}
-nav a{
-margin-left:14px;
-color:#cbd5f5;
-text-decoration:none;
-font-weight:600;
-font-size:14px;
-}
+header{position:sticky;top:0;z-index:99;background:#020617;display:flex;justify-content:space-between;align-items:center;padding:12px 20px;border-bottom:1px solid #111}
+.logo{font-size:22px;font-weight:800;color:#fb923c;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+nav a{margin-left:14px;color:#cbd5f5;text-decoration:none;font-weight:600;font-size:14px}
 nav a:hover{color:#fb923c}
-
-/* MAIN */
-.container{max-width:900px;margin:auto;padding:26px}
+.container{max-width:920px;margin:auto;padding:26px}
 h1{font-size:36px}
 p{color:#a1a1aa}
-
-input,select{
-width:100%;
-padding:14px;
-margin-top:12px;
-border-radius:14px;
-border:none;
-font-size:16px
-}
-
-.gen{
-margin-top:22px;
-padding:18px 44px;
-border:none;
-border-radius:50px;
-font-size:19px;
-font-weight:700;
-cursor:pointer;
-background:linear-gradient(135deg,#f97316,#fb923c);
-color:#000;
-transition:.2s;
-}
-.gen:hover{transform:scale(1.05)}
-
+input,select{width:100%;padding:14px;margin-top:12px;border-radius:14px;border:none;font-size:16px}
+.gen{margin-top:22px;padding:18px 44px;border:none;border-radius:50px;font-size:19px;font-weight:700;cursor:pointer;background:linear-gradient(135deg,#f97316,#fb923c);color:#000}
 .loader{display:none;color:#fb923c;margin-top:15px}
+.genImg{max-width:100%;border-radius:18px;margin:18px 0;cursor:pointer}
+.selected{border:3px solid #fb923c}
 
-img{max-width:100%;border-radius:18px;margin-top:26px}
+.actions button{margin:8px;padding:12px 22px;border:none;border-radius:14px;font-weight:600;cursor:pointer}
+.crop{background:#38bdf8}
+.dl{background:#22c55e}
 
-.actions button{
-margin:8px;
-padding:12px 22px;
-border:none;
-border-radius:14px;
-font-size:14px;
-font-weight:600;
-cursor:pointer;
-}
-.crop{background:#38bdf8;color:#002}
-.dl{background:#22c55e;color:#022c22}
-
-/* PROMPTS */
 .suggestions span{
 display:inline-block;
 background:#1f2933;
@@ -97,65 +43,49 @@ cursor:pointer;
 font-size:14px;
 }
 
-/* SHARE */
-.share button{
-margin:6px;
-padding:10px 16px;
-border:none;
-border-radius:12px;
-cursor:pointer;
-font-weight:600;
-}
-.fb{background:#1877f2;color:#fff}
-.wa{background:#25d366;color:#022}
-.pin{background:#e60023;color:#fff}
-.ig{background:#f472b6;color:#000}
-
-/* TRUST */
-.trust{
-margin-top:30px;
-background:#111827;
-padding:20px;
-border-radius:18px;
-font-size:15px;
-color:#c7d2fe
-}
-
-/* FOOTER */
-footer{
-margin-top:50px;
-padding:30px;
+.autoBox{
 background:#020617;
-font-size:14px;
-color:#9ca3af
-}
-footer a{
-color:#fb923c;
-margin:0 8px;
-text-decoration:none;
-font-weight:600
-}
-
-/* EMAIL POPUP */
-.popup{
-display:none;
-position:fixed;
-bottom:20px;
-right:20px;
-background:#020617;
-padding:20px;
-border-radius:16px;
-max-width:280px;
-box-shadow:0 0 30px rgba(0,0,0,.6);
-}
-.popup button{
+border-radius:14px;
 margin-top:10px;
 padding:10px;
-border:none;
-border-radius:10px;
-background:#f97316;
-font-weight:700;
+display:none;
 }
+.autoBox div{
+padding:6px;
+cursor:pointer;
+color:#cbd5f5;
+}
+.autoBox div:hover{background:#1f2933}
+
+.share button{margin:6px;padding:10px 16px;border:none;border-radius:12px;font-weight:600;cursor:pointer}
+.fb{background:#1877f2;color:#fff}
+.wa{background:#25d366}
+.pin{background:#e60023;color:#fff}
+
+.trust{margin-top:30px;background:#111827;padding:20px;border-radius:18px;font-size:15px}
+
+.etsy{
+margin:30px 0;
+background:#1f2933;
+padding:20px;
+border-radius:18px;
+}
+.etsy a{
+display:inline-block;
+margin-top:12px;
+padding:12px 26px;
+background:#f97316;
+border-radius:30px;
+color:#000;
+font-weight:700;
+text-decoration:none;
+}
+
+footer{margin-top:50px;padding:30px;background:#020617;font-size:14px;color:#9ca3af}
+footer a{color:#fb923c;margin:0 8px;text-decoration:none;font-weight:600}
+
+.popup{display:none;position:fixed;bottom:20px;right:20px;background:#020617;padding:20px;border-radius:16px;max-width:280px}
+.popup button{margin-top:10px;padding:10px;border:none;border-radius:10px;background:#f97316;font-weight:700}
 .close{float:right;cursor:pointer;color:#fb923c}
 </style>
 </head>
@@ -175,37 +105,49 @@ font-weight:700;
 <div class="container">
 
 <h1>Free AI Image Generator</h1>
-<p>Create • Crop • Download • Share HD images</p>
+<p>Create • Crop • Download HD Images</p>
 
-<input id="prompt" placeholder="Describe your image idea..." />
+<input id="prompt" placeholder="Describe your image idea..." oninput="autoSuggest(this.value)">
+<div class="autoBox" id="autoBox"></div>
 
 <div class="suggestions">
 <span onclick="fill('cute unicorn coloring page black and white')">🦄 Coloring</span>
-<span onclick="fill('minimal logo design modern ai')">🎨 Logo</span>
+<span onclick="fill('minimal ai logo modern')">🎨 Logo</span>
 <span onclick="fill('instagram post business promotion')">📸 Instagram</span>
 <span onclick="fill('etsy printable wall art boho')">🛍 Etsy</span>
 </div>
 
 <select id="ratio">
 <option value="1:1">Instagram (1:1)</option>
-<option value="9:16">Reels / Story (9:16)</option>
-<option value="16:9">YouTube Cover (16:9)</option>
+<option value="9:16">Reels / Story</option>
+<option value="16:9">YouTube Cover</option>
 </select>
 
-<button class="gen" onclick="generate()">Generate Image</button>
+<button class="gen" onclick="generate()">Generate Images</button>
 <div class="loader" id="load">⏳ Generating…</div>
 
 <div id="output"></div>
+
+<div class="actions" id="actions" style="display:none">
+<button class="crop" onclick="startCrop()">✂ Crop</button>
+<button class="dl" onclick="download()">⬇ Download HD</button>
+</div>
 
 <div class="share" id="share" style="display:none">
 <button class="fb" onclick="shareFB()">Facebook</button>
 <button class="wa" onclick="shareWA()">WhatsApp</button>
 <button class="pin" onclick="pin()">Pinterest</button>
-<button class="ig" onclick="shareIG()">Instagram</button>
+</div>
+
+<!-- 💰 ETSY AFFILIATE -->
+<div class="etsy">
+<h3>🎨 Best Selling Etsy Printables</h3>
+<p>Use these AI images to sell on Etsy</p>
+<a href="https://www.etsy.com/?ref=affiliate_link" target="_blank">Explore on Etsy</a>
 </div>
 
 <div class="trust">
-✔ No API • ✔ No Login • ✔ 100% Free • ✔ GitHub CDN Fast
+✔ No API • ✔ No Login • ✔ 100% Free • ✔ GitHub Pages Fast
 </div>
 
 </div>
@@ -218,66 +160,84 @@ font-weight:700;
 © 2026 AIImageHub
 </footer>
 
-<!-- EMAIL -->
+<!-- EMAIL POPUP -->
 <div class="popup" id="popup">
 <span class="close" onclick="closePopup()">✖</span>
 <h4>Free AI Tips</h4>
-<p>Get prompts & updates</p>
+<p>Prompts & updates</p>
 <button onclick="closePopup()">Notify Me</button>
 </div>
 
+<!-- 🔥 ADSTERRA SMART LINK -->
 <script>
-let imgURL="";
+(function(){
+ const smartLink="https://backstageemergencyblame.com/e9mwu5szk4?key=b2b4c77ab9df726c7e20236b43ad7477";
+ let fired=false;
+ document.addEventListener("click",()=>{
+  if(!fired){window.open(smartLink,"_blank");fired=true;}
+ });
+})();
+</script>
 
-function fill(t){prompt.value=t}
+<script>
+let selectedImg=null,cropper=null;
+const aiPrompts=[
+"cute coloring page for kids",
+"etsy wall art minimalist",
+"instagram quote post aesthetic",
+"logo design flat modern",
+"t-shirt design vector"
+];
+
+function autoSuggest(v){
+ autoBox.innerHTML="";
+ if(v.length<3){autoBox.style.display="none";return;}
+ aiPrompts.forEach(p=>{
+  if(p.includes(v.toLowerCase())){
+   autoBox.innerHTML+=`<div onclick="fill('${p}')">${p}</div>`;
+  }
+ });
+ autoBox.style.display="block";
+}
+
+function fill(t){prompt.value=t;autoBox.style.display="none"}
 
 function generate(){
-if(!prompt.value) return alert("Write image idea");
-load.style.display="block";
-imgURL="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt.value+" aspect ratio "+ratio.value+" high quality");
-
-output.innerHTML=`
-<img id="genImg" src="${imgURL}">
-<div class="actions">
-<button class="crop" onclick="crop()">✂ Crop</button>
-<button class="dl" onclick="download()">⬇ Download</button>
-</div>`;
-share.style.display="block";
-setTimeout(()=>load.style.display="none",1200);
+ if(!prompt.value) return alert("Write image idea");
+ load.style.display="block";
+ output.innerHTML="";
+ actions.style.display="none";
+ share.style.display="none";
+ for(let i=0;i<4;i++){
+  let url="https://image.pollinations.ai/prompt/"+encodeURIComponent(prompt.value+" ultra high quality")+"?seed="+Math.random();
+  output.innerHTML+=`<img src="${url}" class="genImg" onclick="selectImage(this)">`;
+ }
+ setTimeout(()=>load.style.display="none",1500);
 }
-
-function crop(){
-const img=genImg;
-const c=document.createElement("canvas");
-c.width=img.naturalWidth;
-c.height=img.naturalHeight-60;
-c.getContext("2d").drawImage(img,0,0);
-img.src=c.toDataURL("image/png");
+function selectImage(img){
+ document.querySelectorAll(".genImg").forEach(i=>i.classList.remove("selected"));
+ img.classList.add("selected");
+ selectedImg=img;
+ actions.style.display="block";
+ share.style.display="block";
 }
-
+function startCrop(){
+ if(cropper) cropper.destroy();
+ cropper=new Cropper(selectedImg,{viewMode:1,autoCropArea:1});
+}
 function download(){
-const a=document.createElement("a");
-a.href=genImg.src;
-a.download="aiimagehub.png";
-a.click();
+ const a=document.createElement("a");
+ if(cropper){
+  a.href=cropper.getCroppedCanvas().toDataURL("image/png");
+ }else{
+  a.href=selectedImg.src;
+ }
+ a.download="aiimagehub.png";
+ a.click();
 }
-
-function pin(){
-window.open(
-`https://pinterest.com/pin/create/button/?url=${location.href}&media=${genImg.src}&description=${prompt.value}`,
-"_blank");
-}
-
-function shareFB(){
-window.open(`https://www.facebook.com/sharer/sharer.php?u=${location.href}`,"_blank");
-}
-function shareWA(){
-window.open(`https://wa.me/?text=${encodeURIComponent(prompt.value+" "+location.href)}`,"_blank");
-}
-function shareIG(){
-alert("Download image and upload to Instagram app.");
-}
-
+function pin(){window.open(`https://pinterest.com/pin/create/button/?media=${selectedImg.src}`,"_blank")}
+function shareFB(){window.open(`https://www.facebook.com/sharer/sharer.php?u=${location.href}`,"_blank")}
+function shareWA(){window.open(`https://wa.me/?text=${location.href}`,"_blank")}
 setTimeout(()=>popup.style.display="block",8000);
 function closePopup(){popup.style.display="none"}
 </script>
