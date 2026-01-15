@@ -73,9 +73,10 @@
         textarea { width: 100%; height: 120px; padding: 15px; border-radius: 12px; background: #0f172a; color: white; border: 1px solid #334155; font-size: 16px; resize: none; box-sizing: border-box; outline: none; transition: 0.3s; }
         textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(99, 102, 241, 0.2); }
         
+        /* Updated Location for Suggestions */
         .suggestion-box {
             text-align: left;
-            margin-top: 15px;
+            margin-bottom: 15px; /* Added spacing below */
             padding: 15px;
             background: rgba(51, 65, 85, 0.3);
             border-radius: 10px;
@@ -145,7 +146,6 @@
 </header>
 
 <!-- ADSTERRA PLACEMENT 1: VISUAL BANNER -->
-<!-- 'rel="nofollow"' ensures Google doesn't penalize your SEO -->
 <div class="ad-slot" onclick="openPartnerLink()">
     <span class="ad-text">🔥 SPONSORED: Get Exclusive High-Ticket Tools & Offers Here</span>
     <span class="ad-sub">Support this free tool by visiting our sponsor (Opens in new tab)</span>
@@ -157,8 +157,7 @@
         <p>Create stunning, copyright-free images for your Etsy store or Social Media in seconds.</p>
 
         <div class="search-area">
-            <textarea id="promptInput" placeholder="Describe your imagination here..."></textarea>
-            
+            <!-- SUGGESTION BOX MOVED HERE (ABOVE TEXTAREA) -->
             <div class="suggestion-box">
                 <strong>🇺🇸 Trending Ideas for USA Market:</strong>
                 Try describing details like 
@@ -170,6 +169,8 @@
                 <em>Tip: For best results, mention "Vector Art" or "White Background" in your description.</em>
             </div>
 
+            <textarea id="promptInput" placeholder="Describe your imagination here..."></textarea>
+            
             <div class="controls">
                 <select id="aspectRatio">
                     <option value="1024/1024">Square (1:1) - Sticker/Insta</option>
@@ -229,7 +230,6 @@
     let adHasBeenShown = false;
 
     function openPartnerLink() {
-        // Safe implementation: Opens in new tab
         window.open(AD_LINK, '_blank', 'noopener,noreferrer');
     }
     // --- ADSTERRA CONFIGURATION END ---
@@ -253,15 +253,14 @@
         document.getElementById("usageCount").innerText = `Daily Limit: ${count}/${DAILY_LIMIT} Generates used`;
     }
 
+    // Helper for delay to fix rate limits
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
     async function generateImages() {
         // --- SMART AD TRIGGER ---
-        // বিজ্ঞাপনটি শুধুমাত্র প্রথমবার জেনারেট করার সময় নতুন ট্যাবে ওপেন হবে।
-        // এতে ইউজার বিরক্ত হবে না, কিন্তু আপনি রেভিনিউ পাবেন।
         if (!adHasBeenShown) {
             openPartnerLink();
             adHasBeenShown = true;
-            // Note: Ad blockers might block this if not triggered directly by click, 
-            // but since it's inside the onclick event of the button, it usually passes.
         }
         // -------------------------
 
@@ -284,6 +283,7 @@
 
         activePrompt = prompt;
         genBtn.disabled = true;
+        genBtn.innerText = "Generating...";
         loader.style.display = "block";
         grid.innerHTML = ""; 
 
@@ -304,9 +304,14 @@
 
         const finalPrompt = `${prompt}, ${stylePrompt}, ${baseEnhance}`;
 
+        // Loop updated to be Async to handle Rate Limiting
         for(let i=0; i<4; i++) {
+            // FIX: Added Delay between requests to prevent 429 Rate Limit
+            if(i > 0) await delay(800); // 800ms wait between images
+
             const seed = Math.floor(Math.random() * 999999999);
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true&model=flux`; 
+            // FIX: Added Date.now() to ensure URL is unique and bypass browser cache
+            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true&model=flux&ref=${Date.now()}`; 
             
             const card = document.createElement("div");
             card.className = "img-card";
@@ -316,7 +321,10 @@
             img.alt = `${prompt} AI design`;
             img.loading = "lazy";
             
-            img.onerror = () => { card.remove(); };
+            // Handle loading error by removing the card
+            img.onerror = () => { 
+                card.remove(); 
+            };
 
             card.appendChild(img);
             card.onclick = () => {
@@ -328,10 +336,9 @@
             grid.appendChild(card);
         }
 
-        setTimeout(() => {
-            genBtn.disabled = false;
-            loader.style.display = "none";
-        }, 3500); 
+        genBtn.disabled = false;
+        genBtn.innerText = "🚀 Generate Art";
+        loader.style.display = "none";
     }
 
     async function downloadImage() {
