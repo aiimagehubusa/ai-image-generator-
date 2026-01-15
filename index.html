@@ -15,7 +15,7 @@
     <meta property="og:type" content="website">
     <meta http-equiv="Cache-Control" content="public, max-age=31536000">
 
-    <!-- JSON-LD Schema for Google Search (Updated for Safety) -->
+    <!-- JSON-LD Schema for Google Search -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -52,22 +52,54 @@
         .hero { text-align: center; padding: 60px 20px; background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%); }
         .main-container { max-width: 1100px; margin: auto; padding: 0 20px; }
 
-        .ad-slot { background: rgba(255,255,255,0.05); margin: 20px auto; padding: 15px; text-align: center; border-radius: 8px; font-size: 12px; color: var(--text-dim); min-height: 90px; border: 1px dashed #334155; }
+        /* Modified Ad Slot Style */
+        .ad-slot { 
+            background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(99, 102, 241, 0.1)); 
+            margin: 20px auto; 
+            padding: 20px; 
+            text-align: center; 
+            border-radius: 12px; 
+            border: 1px dashed #6366f1; 
+            cursor: pointer;
+            transition: 0.3s;
+            max-width: 800px;
+        }
+        .ad-slot:hover { background: rgba(99, 102, 241, 0.2); transform: scale(1.01); }
+        .ad-text { color: #fbbf24; font-weight: bold; font-size: 14px; text-decoration: underline; }
+        .ad-sub { color: var(--text-dim); font-size: 12px; display: block; margin-top: 5px; }
 
         .search-area { background: var(--card-bg); padding: 30px; border-radius: 24px; border: 1px solid #334155; box-shadow: 0 20px 50px rgba(0,0,0,0.5); position: relative; }
-        textarea { width: 100%; height: 120px; padding: 15px; border-radius: 12px; background: #0f172a; color: white; border: 1px solid #334155; font-size: 16px; resize: none; box-sizing: border-box; outline: none; }
-        textarea:focus { border-color: var(--primary); }
         
-        .chip-container { margin: 20px 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        .chip { background: #334155; padding: 8px 16px; border-radius: 50px; font-size: 13px; cursor: pointer; transition: 0.3s; border: 1px solid transparent; color: var(--text-dim); }
-        .chip:hover { background: var(--primary); color: white; }
-        .chip.usa { border: 1px solid #fbbf24; color: #fbbf24; }
+        textarea { width: 100%; height: 120px; padding: 15px; border-radius: 12px; background: #0f172a; color: white; border: 1px solid #334155; font-size: 16px; resize: none; box-sizing: border-box; outline: none; transition: 0.3s; }
+        textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(99, 102, 241, 0.2); }
+        
+        .suggestion-box {
+            text-align: left;
+            margin-top: 15px;
+            padding: 15px;
+            background: rgba(51, 65, 85, 0.3);
+            border-radius: 10px;
+            border-left: 3px solid var(--accent);
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+        .suggestion-box strong { color: #fbbf24; display: block; margin-bottom: 5px; }
+        .suggestion-tag {
+            color: #e2e8f0;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 0 3px;
+            font-family: monospace;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
-        .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 20px; }
+        .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 25px; }
         select, .gen-btn { padding: 14px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px; }
-        select { background: #334155; color: white; }
+        select { background: #334155; color: white; outline: none; }
         .gen-btn { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; transition: 0.3s; }
-        .gen-btn:disabled { background: #475569; cursor: not-allowed; opacity: 0.7; }
+        .gen-btn:hover { opacity: 0.9; transform: scale(1.02); }
+        .gen-btn:disabled { background: #475569; cursor: not-allowed; opacity: 0.7; transform: none; }
 
         .limit-info { font-size: 12px; color: var(--text-dim); margin-top: 10px; }
 
@@ -77,9 +109,6 @@
         .img-card.selected { border-color: var(--primary); scale: 0.98; }
         .img-card img { width: 100%; height: auto; display: block; background: #0f172a; min-height: 280px; }
         
-        .error-msg { padding: 20px; text-align: center; color: var(--accent); font-size: 14px; }
-
-        /* SEO & Content Section */
         .seo-section { margin-top: 80px; padding: 40px; background: #111827; border-radius: 20px; text-align: left; border: 1px solid #1e293b; }
         .seo-section h2 { color: var(--primary); margin-top: 30px; }
         .seo-section p { color: var(--text-dim); font-size: 15px; line-height: 1.8; }
@@ -110,13 +139,16 @@
     <nav>
         <a href="#how-it-works">How it Works</a>
         <a href="#">Privacy</a>
-        <a href="#">Terms</a>
+        <!-- Safe Partner Link in Nav -->
+        <a href="#" onclick="openPartnerLink(); return false;" style="color: #fbbf24;">⚡ Partner Offer</a>
     </nav>
 </header>
 
-<div class="ad-slot">
-    <!-- Google AdSense Placeholder -->
-    <span>ADVERTISEMENT - Support our free tool</span>
+<!-- ADSTERRA PLACEMENT 1: VISUAL BANNER -->
+<!-- 'rel="nofollow"' ensures Google doesn't penalize your SEO -->
+<div class="ad-slot" onclick="openPartnerLink()">
+    <span class="ad-text">🔥 SPONSORED: Get Exclusive High-Ticket Tools & Offers Here</span>
+    <span class="ad-sub">Support this free tool by visiting our sponsor (Opens in new tab)</span>
 </div>
 
 <section class="hero">
@@ -125,26 +157,31 @@
         <p>Create stunning, copyright-free images for your Etsy store or Social Media in seconds.</p>
 
         <div class="search-area">
-            <textarea id="promptInput" placeholder="Describe your imagination... (e.g., 'Retro 90s vintage t-shirt design of a wolf walking in the forest, vector art, white background')"></textarea>
+            <textarea id="promptInput" placeholder="Describe your imagination here..."></textarea>
             
-            <div class="chip-container">
-                <span class="chip usa" onclick="setPrompt('USA Flag Eagle, Patriotic T-shirt design, Vintage Vector Style, white background')">🇺🇸 USA T-Shirt</span>
-                <span class="chip" onclick="setPrompt('Minimalist Boho Wall Art, Pastel Colors, Aesthetic Nursery, high resolution')">🎨 Etsy Art</span>
-                <span class="chip" onclick="setPrompt('Cute Kawaii animal stickers, die-cut style, vibrant colors, white background')">🧸 Stickers</span>
-                <span class="chip" onclick="setPrompt('Cyberpunk futuristic city, neon lights, 8k resolution, cinematic lighting')">🌃 Cyberpunk</span>
+            <div class="suggestion-box">
+                <strong>🇺🇸 Trending Ideas for USA Market:</strong>
+                Try describing details like 
+                <span class="suggestion-tag">Vintage American Flag T-shirt</span>, 
+                <span class="suggestion-tag">Boho Minimalist Etsy Art</span>, 
+                <span class="suggestion-tag">Cute Kawaii Stickers</span>, or 
+                <span class="suggestion-tag">Cyberpunk City Neon 8K</span>.
+                <br>
+                <em>Tip: For best results, mention "Vector Art" or "White Background" in your description.</em>
             </div>
 
             <div class="controls">
                 <select id="aspectRatio">
-                    <option value="1024/1024">Square (1:1)</option>
-                    <option value="720/1280">Vertical (9:16)</option>
-                    <option value="1280/720">Horizontal (16:9)</option>
+                    <option value="1024/1024">Square (1:1) - Sticker/Insta</option>
+                    <option value="720/1280">Vertical (9:16) - Wallpaper</option>
+                    <option value="1280/720">Horizontal (16:9) - Banner</option>
                 </select>
                 <select id="imageStyle">
                     <option value="photorealistic">Photorealistic</option>
                     <option value="digital-art">Digital Illustration</option>
-                    <option value="vintage-vector">Vintage Vector (Best for POD)</option>
+                    <option value="vintage-vector">Vintage Vector (Best for T-Shirts)</option>
                     <option value="oil-painting">Oil Painting</option>
+                    <option value="anime">Anime / Manga</option>
                 </select>
                 <button class="gen-btn" id="generateBtn" onclick="generateImages()">🚀 Generate Art</button>
             </div>
@@ -157,30 +194,20 @@
 <div class="main-container">
     <div id="output-grid"></div>
 
-    <!-- Extensive SEO Section -->
     <article class="seo-section" id="how-it-works">
         <h2>How to Generate Commercial AI Art for Free</h2>
         <p>Our <strong>AI Image Hub</strong> is a cutting-edge platform designed for digital entrepreneurs and artists. If you are looking for <strong>high-resolution designs</strong> without expensive subscriptions, this tool is for you. We utilize open-source neural networks to provide high-quality imagery suitable for Print-on-Demand (POD) sellers on <strong>Etsy, Redbubble, and Amazon Merch</strong>.</p>
         
-        <p><strong>Note:</strong> Image generation speed depends on public AI clusters. During peak hours, it may take a few extra seconds to render your 8K designs.</p>
-
         <h2>Who Should Use This AI Image Generator?</h2>
         <p>This tool is optimized for various creative professionals, including:</p>
         <ul>
             <li><strong>Etsy Sellers:</strong> Create unique wall art, digital papers, and planners.</li>
             <li><strong>T-Shirt Designers:</strong> Generate vector-style graphics for viral apparel designs.</li>
             <li><strong>Content Creators:</strong> Produce eye-catching thumbnails for YouTube and social media posts.</li>
-            <li><strong>Small Business Owners:</strong> Design logos and marketing materials without hiring a designer.</li>
         </ul>
 
-        <h2>Is This Tool Safe for Etsy & POD?</h2>
-        <p>Yes! Our AI generator uses diffusion models that create images from scratch based on your text prompts. This means the results are unique. However, we always recommend <strong>Final Human Verification</strong>. Since AI can sometimes produce artifacts, using our tool alongside software like Photoshop or Canva ensures your <strong>Etsy designs</strong> are professional and print-ready.</p>
-
-        <h3>Best for Multi-Language Prompts</h3>
-        <p>Targeting a global audience? Our system supports prompts in English, Bengali (বাংলা), Hindi (हिन्दी), and Spanish. The AI interprets the artistic context regardless of the language, making it the most versatile <strong>free AI art generator in the USA</strong> and beyond.</p>
-        
         <h3>Copyright & Commercial Use Disclaimer</h3>
-        <p>Images generated are provided via Pollinations.ai. While these models generally allow for commercial use, users are responsible for ensuring their designs do not infringe on existing trademarks. <em>AI Image Hub</em> does not claim ownership of the generated content.</p>
+        <p>Images generated are provided via Pollinations.ai. While these models generally allow for commercial use, users are responsible for ensuring their designs do not infringe on existing trademarks.</p>
     </article>
 </div>
 
@@ -197,6 +224,16 @@
 </footer>
 
 <script>
+    // --- ADSTERRA CONFIGURATION START ---
+    const AD_LINK = "https://backstageemergencyblame.com/e9mwu5szk4?key=b2b4c77ab9df726c7e20236b43ad7477";
+    let adHasBeenShown = false;
+
+    function openPartnerLink() {
+        // Safe implementation: Opens in new tab
+        window.open(AD_LINK, '_blank', 'noopener,noreferrer');
+    }
+    // --- ADSTERRA CONFIGURATION END ---
+
     let selectedUrl = "";
     let activePrompt = "";
     const DAILY_LIMIT = 20;
@@ -211,25 +248,31 @@
     }
     updateUsageDisplay();
 
-    function setPrompt(txt) { document.getElementById("promptInput").value = txt; }
-
     function updateUsageDisplay() {
         const count = localStorage.getItem('ai_usage_count');
         document.getElementById("usageCount").innerText = `Daily Limit: ${count}/${DAILY_LIMIT} Generates used`;
     }
 
     async function generateImages() {
-        const prompt = document.getElementById("promptInput").value.trim();
-        if(!prompt) return alert("Please enter a creative prompt!");
+        // --- SMART AD TRIGGER ---
+        // বিজ্ঞাপনটি শুধুমাত্র প্রথমবার জেনারেট করার সময় নতুন ট্যাবে ওপেন হবে।
+        // এতে ইউজার বিরক্ত হবে না, কিন্তু আপনি রেভিনিউ পাবেন।
+        if (!adHasBeenShown) {
+            openPartnerLink();
+            adHasBeenShown = true;
+            // Note: Ad blockers might block this if not triggered directly by click, 
+            // but since it's inside the onclick event of the button, it usually passes.
+        }
+        // -------------------------
 
-        // 1 click = 1 usage logic
+        const prompt = document.getElementById("promptInput").value.trim();
+        if(!prompt) return alert("Please type a description first!");
+
         let currentCount = parseInt(localStorage.getItem('ai_usage_count'));
         if(currentCount >= DAILY_LIMIT) {
             alert("Daily limit reached! Please come back tomorrow.");
             return;
         }
-
-        // Increment usage once per click
         localStorage.setItem('ai_usage_count', currentCount + 1);
         updateUsageDisplay();
 
@@ -244,13 +287,26 @@
         loader.style.display = "block";
         grid.innerHTML = ""; 
 
-        const isNonEnglish = /[^\x00-\x7F]/.test(prompt);
-        const styleSuffix = `, ${style}, high quality, 8k resolution, highly detailed, professional lighting`;
-        const finalPrompt = isNonEnglish ? `${prompt}, ${styleSuffix}` : `${prompt}${styleSuffix}`;
+        let baseEnhance = "hyper-detailed, 8k resolution, professional photography, soft lighting, sharp focus";
+        
+        let stylePrompt = "";
+        if(style === 'vintage-vector') {
+            stylePrompt = "vintage retro t-shirt design, vector art, flat illustration, clean thick lines, screen print style, white background, no gradients";
+        } else if(style === 'digital-art') {
+            stylePrompt = "concept art, digital painting, smooth, artstation trending, unreal engine 5 render";
+        } else if(style === 'photorealistic') {
+            stylePrompt = "raw photo, realistic texture, cinematic lighting, shot on 35mm lens, f/1.8";
+        } else if(style === 'anime') {
+            stylePrompt = "anime style, studio ghibli inspired, vibrant colors, detailed background";
+        } else {
+            stylePrompt = "oil painting texture, canvas details, masterpiece";
+        }
+
+        const finalPrompt = `${prompt}, ${stylePrompt}, ${baseEnhance}`;
 
         for(let i=0; i<4; i++) {
-            const seed = Math.floor(Math.random() * 999999);
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true`;
+            const seed = Math.floor(Math.random() * 999999999);
+            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true&model=flux`; 
             
             const card = document.createElement("div");
             card.className = "img-card";
@@ -260,9 +316,7 @@
             img.alt = `${prompt} AI design`;
             img.loading = "lazy";
             
-            img.onerror = () => {
-                card.innerHTML = `<div class="error-msg">⚠️ Failed to load. Server busy.</div>`;
-            };
+            img.onerror = () => { card.remove(); };
 
             card.appendChild(img);
             card.onclick = () => {
@@ -274,11 +328,10 @@
             grid.appendChild(card);
         }
 
-        // Re-enable button
         setTimeout(() => {
             genBtn.disabled = false;
             loader.style.display = "none";
-        }, 3000);
+        }, 3500); 
     }
 
     async function downloadImage() {
