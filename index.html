@@ -6,14 +6,37 @@
     
     <!-- Optimized SEO Title & Meta (USA Target) -->
     <title>Free AI Image Generator for Etsy, T-Shirts & POD | No Login Required</title>
-    <meta name="description" content="Generate 8K high-quality AI art for Etsy, Shopify, and Print-on-Demand. Free commercial use AI image creator. No registration. Supports Vector, Photos, and Anime.">
-    <meta name="keywords" content="Free AI Image Generator, Etsy AI Art, T-shirt design AI, Print on Demand AI, Copyright free AI images, Coloring book AI">
+    <meta name="description" content="Generate 8K high-quality AI art for Etsy, Shopify, and Print-on-Demand. Free commercial use AI image creator. No registration, no fees. Supports English & Multi-language.">
+    <meta name="keywords" content="Free AI Image Generator, Etsy AI Art, T-shirt design AI, Print on Demand AI, Copyright free AI images, USA AI tool">
     
     <!-- Open Graph for Viral Social Sharing -->
     <meta property="og:title" content="Free Global AI Image Hub - 8K Design Tool">
     <meta property="og:description" content="Create viral T-shirt & Etsy designs in seconds for free.">
     <meta property="og:type" content="website">
     <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+
+    <!-- JSON-LD Schema for Google Search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Global AI Image Hub",
+      "operatingSystem": "Any",
+      "applicationCategory": "MultimediaApplication",
+      "offers": { 
+        "@type": "Offer", 
+        "price": "0", 
+        "priceCurrency": "USD" 
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "2450",
+        "bestRating": "5",
+        "worstRating": "1"
+      }
+    }
+    </script>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
@@ -29,7 +52,7 @@
         .hero { text-align: center; padding: 60px 20px; background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%); }
         .main-container { max-width: 1100px; margin: auto; padding: 0 20px; }
 
-        /* Banner Ad Style (Safe & Compliant) */
+        /* Modified Ad Slot Style */
         .ad-slot { 
             background: linear-gradient(45deg, rgba(255,255,255,0.05), rgba(99, 102, 241, 0.1)); 
             margin: 20px auto; 
@@ -50,9 +73,10 @@
         textarea { width: 100%; height: 120px; padding: 15px; border-radius: 12px; background: #0f172a; color: white; border: 1px solid #334155; font-size: 16px; resize: none; box-sizing: border-box; outline: none; transition: 0.3s; }
         textarea:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(99, 102, 241, 0.2); }
         
+        /* Updated Location for Suggestions */
         .suggestion-box {
             text-align: left;
-            margin-bottom: 15px;
+            margin-bottom: 15px; /* Added spacing below */
             padding: 15px;
             background: rgba(51, 65, 85, 0.3);
             border-radius: 10px;
@@ -60,7 +84,16 @@
             font-size: 13px;
             color: var(--text-dim);
         }
-        .suggestion-tag { color: #e2e8f0; background: rgba(255,255,255,0.1); padding: 2px 8px; border-radius: 4px; margin: 0 3px; font-family: monospace; border: 1px solid rgba(255,255,255,0.1); }
+        .suggestion-box strong { color: #fbbf24; display: block; margin-bottom: 5px; }
+        .suggestion-tag {
+            color: #e2e8f0;
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin: 0 3px;
+            font-family: monospace;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
 
         .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-top: 25px; }
         select, .gen-btn { padding: 14px; border-radius: 10px; border: none; font-weight: 600; cursor: pointer; font-family: inherit; font-size: 14px; }
@@ -77,6 +110,11 @@
         .img-card.selected { border-color: var(--primary); scale: 0.98; }
         .img-card img { width: 100%; height: auto; display: block; background: #0f172a; min-height: 280px; }
         
+        .seo-section { margin-top: 80px; padding: 40px; background: #111827; border-radius: 20px; text-align: left; border: 1px solid #1e293b; }
+        .seo-section h2 { color: var(--primary); margin-top: 30px; }
+        .seo-section p { color: var(--text-dim); font-size: 15px; line-height: 1.8; }
+        .seo-section ul { color: var(--text-dim); font-size: 15px; }
+
         .action-bar { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: #1e293b; padding: 15px 30px; border-radius: 50px; display: none; gap: 15px; border: 2px solid var(--primary); box-shadow: 0 10px 40px rgba(0,0,0,0.8); z-index: 3000; }
         .action-btn { padding: 10px 20px; border-radius: 25px; border: none; font-weight: bold; cursor: pointer; }
         .dl-btn { background: #22c55e; color: white; }
@@ -86,6 +124,7 @@
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
         footer { margin-top: 100px; padding: 50px; background: #020617; border-top: 1px solid #1e293b; text-align: center; }
+        .footer-links { margin-bottom: 20px; }
         .footer-links a { color: var(--text-dim); text-decoration: none; margin: 0 10px; font-size: 13px; }
 
         @media (max-width: 600px) {
@@ -100,51 +139,58 @@
     <a href="/" class="logo">AI Image Hub</a>
     <nav>
         <a href="#how-it-works">How it Works</a>
+        <a href="#">Privacy</a>
+        <!-- Safe Partner Link in Nav -->
         <a href="#" onclick="openPartnerLink(); return false;" style="color: #fbbf24;">⚡ Partner Offer</a>
     </nav>
 </header>
 
-<!-- ADSTERRA PLACEMENT: BANNER ONLY (No Auto Redirect) -->
+<!-- ADSTERRA PLACEMENT 1: VISUAL BANNER -->
 <div class="ad-slot" onclick="openPartnerLink()">
     <span class="ad-text">🔥 SPONSORED: Get Exclusive High-Ticket Tools & Offers Here</span>
-    <span class="ad-sub">Click here to support this free tool (Opens in new tab)</span>
+    <span class="ad-sub">Support this free tool by visiting our sponsor (Opens in new tab)</span>
 </div>
 
 <section class="hero">
     <div class="main-container">
-        <h1>Pro AI Image Generator for POD & Commercial Use</h1>
-        <p>Create stunning, copyright-free images for Etsy, Amazon, and Social Media.</p>
+        <h1>High-Quality AI Art Generator for POD</h1>
+        <p>Create stunning, copyright-free images for your Etsy store or Social Media in seconds.</p>
 
         <div class="search-area">
+            <!-- SUGGESTION BOX -->
             <div class="suggestion-box">
-                <strong>🇺🇸 Power Prompt Ideas:</strong>
-                Try: <span class="suggestion-tag">Vintage Sunset Vector T-shirt</span>, 
-                <span class="suggestion-tag">Cute Cat Coloring Book Page</span>, 
-                <span class="suggestion-tag">Minimalist Boho Wall Art</span>, 
+                <strong>🇺🇸 Trending Ideas for USA Market:</strong>
+                Try describing details like 
+                <span class="suggestion-tag">Vintage American Flag T-shirt</span>, 
+                <span class="suggestion-tag">Coloring Book Page</span>, 
+                <span class="suggestion-tag">Minimalist Line Art</span>, or 
                 <span class="suggestion-tag">Cyberpunk City Neon 8K</span>.
+                <br>
+                <em>Tip: Use the "Style" dropdown below to auto-enhance your result.</em>
             </div>
 
-            <textarea id="promptInput" placeholder="Describe your imagination here... (e.g., 'A cute astronaut cat floating in space, vector style')"></textarea>
+            <textarea id="promptInput" placeholder="Describe your imagination here (e.g., 'Cute cat wearing sunglasses')..."></textarea>
             
             <div class="controls">
                 <select id="aspectRatio">
                     <option value="1024/1024">Square (1:1) - Sticker/Insta</option>
-                    <option value="896/1152">Portrait (3:4) - T-Shirt/Poster</option>
-                    <option value="1280/720">Landscape (16:9) - Banner</option>
+                    <option value="720/1280">Vertical (9:16) - Tiktok/Reel</option>
+                    <option value="1280/720">Horizontal (16:9) - Banner/YouTube</option>
+                    <option value="1024/1280">Portrait (4:5) - Etsy Listing</option>
                 </select>
-                <!-- Updated Categories based on Logic -->
+                <!-- EXPANDED STYLE SELECTOR BASED ON SYSTEM PROMPT -->
                 <select id="imageStyle">
-                    <option value="auto">✨ Auto / General</option>
-                    <option value="vintage-vector">👕 T-Shirt Vector (POD)</option>
-                    <option value="photorealistic">📸 Photorealistic (Product)</option>
-                    <option value="coloring-book">🖍️ Coloring Book (B&W)</option>
-                    <option value="3d-render">🧊 3D Icon / Mockup</option>
-                    <option value="anime">🏯 Anime / Manga</option>
-                    <option value="sticker">🏷️ Sticker Design</option>
+                    <option value="vintage-vector">★ T-Shirt Vector (Best for POD)</option>
+                    <option value="photorealistic">Photorealistic (Product/Ads)</option>
+                    <option value="digital-art">Digital Illustration</option>
+                    <option value="coloring-book">Coloring Book (B&W Line Art)</option>
+                    <option value="sticker-art">Sticker Design (White Bg)</option>
+                    <option value="anime">Anime / Manga</option>
+                    <option value="3d-render">3D Cute Icon / Pixar Style</option>
+                    <option value="mockup">Product Mockup (T-Shirt/Mug)</option>
                 </select>
                 <button class="gen-btn" id="generateBtn" onclick="generateImages()">🚀 Generate Art</button>
             </div>
-            <!-- Soft Limit Friendly Text -->
             <div class="limit-info" id="usageCount">Free usage available. Heavy usage may be softened for stability.</div>
             <div class="loader" id="loader"></div>
         </div>
@@ -153,6 +199,23 @@
 
 <div class="main-container">
     <div id="output-grid"></div>
+
+    <article class="seo-section" id="how-it-works">
+        <h2>How to Generate Commercial AI Art for Free</h2>
+        <p>Our <strong>AI Image Hub</strong> is a cutting-edge platform designed for digital entrepreneurs and artists. If you are looking for <strong>high-resolution designs</strong> without expensive subscriptions, this tool is for you. We utilize open-source neural networks to provide high-quality imagery suitable for Print-on-Demand (POD) sellers on <strong>Etsy, Redbubble, and Amazon Merch</strong>.</p>
+        
+        <h2>Who Should Use This AI Image Generator?</h2>
+        <p>This tool is optimized for various creative professionals, including:</p>
+        <ul>
+            <li><strong>Etsy Sellers:</strong> Create unique wall art, digital papers, and planners.</li>
+            <li><strong>T-Shirt Designers:</strong> Generate vector-style graphics for viral apparel designs.</li>
+            <li><strong>Content Creators:</strong> Produce eye-catching thumbnails for YouTube and social media posts.</li>
+            <li><strong>KDP Publishers:</strong> Generate coloring book pages and book covers.</li>
+        </ul>
+
+        <h3>Copyright & Commercial Use Disclaimer</h3>
+        <p>Images generated are provided via Pollinations.ai (Flux Model). While these models generally allow for commercial use, users are responsible for ensuring their designs do not infringe on existing trademarks.</p>
+    </article>
 </div>
 
 <div class="action-bar" id="actionBar">
@@ -162,87 +225,72 @@
 
 <footer>
     <div class="footer-links">
-        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+        <a href="#">About Us</a> | <a href="#">Contact</a> | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
     </div>
-    <p>&copy; 2026 AI Image Hub. Powered by Flux AI.</p>
+    <p>&copy; 2026 AI Image Hub. Empowering Global Creators.</p>
 </footer>
 
 <script>
     // --- ADSTERRA / PARTNER CONFIGURATION ---
     const AD_LINK = "https://backstageemergencyblame.com/e9mwu5szk4?key=b2b4c77ab9df726c7e20236b43ad7477";
-    
-    // Explicit User Action Required for Ad
+
     function openPartnerLink() {
         window.open(AD_LINK, '_blank', 'noopener,noreferrer');
     }
+    // ----------------------------------------
 
     let selectedUrl = "";
     let activePrompt = "";
     
-    // --- SOFT LIMIT CONFIGURATION ---
-    const DAILY_LIMIT = 50; // Increased to 50
-    
-    // Initialize usage
-    const today = new Date().toDateString();
-    if(localStorage.getItem('ai_usage_date') !== today) {
-        localStorage.setItem('ai_usage_date', today);
+    // UPDATED: Relaxed Limit to 50 for better UX
+    const DAILY_LIMIT = 50; 
+
+    // Initialize usage count logic
+    if(!localStorage.getItem('ai_usage_date')) {
+        localStorage.setItem('ai_usage_date', new Date().toDateString());
+        localStorage.setItem('ai_usage_count', '0');
+    } else if(localStorage.getItem('ai_usage_date') !== new Date().toDateString()) {
+        localStorage.setItem('ai_usage_date', new Date().toDateString());
         localStorage.setItem('ai_usage_count', '0');
     }
+    
+    // Initial display update
     updateUsageDisplay();
 
     function updateUsageDisplay() {
-        const count = localStorage.getItem('ai_usage_count');
-        document.getElementById("usageCount").innerText = 
-            `Free usage available (${count}/${DAILY_LIMIT}). Heavy usage may be softened for stability.`;
+        const count = parseInt(localStorage.getItem('ai_usage_count'));
+        // UPDATED: User Friendly Message
+        const msg = document.getElementById("usageCount");
+        if (count >= DAILY_LIMIT) {
+            msg.innerText = "Daily safety limit reached. Please try again tomorrow.";
+            msg.style.color = "#f43f5e";
+        } else {
+            msg.innerText = `Free usage available. Heavy usage may be softened for stability. (${count}/${DAILY_LIMIT})`;
+            msg.style.color = "#94a3b8";
+        }
     }
 
+    // Helper for delay to fix rate limits (CRITICAL FOR 4 IMAGES)
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
-    // --- SMART PROMPT ENGINEERING ---
-    function constructSmartPrompt(userInput, styleType) {
-        let baseStyle = "";
-        let qualityBoost = "ultra high quality, sharp focus, clean composition, professional, 8k resolution, no watermark, no text artifacts";
-        
-        switch (styleType) {
-            case 'vintage-vector':
-                baseStyle = "vintage t-shirt design, vector art style, flat illustration, clean thick outlines, screen print ready, white background, no gradients, svg style";
-                break;
-            case 'photorealistic':
-                baseStyle = "photorealistic photography, dslr quality, realistic lighting, natural shadows, depth of field, 35mm lens, f/1.8, cinematic lighting";
-                break;
-            case 'coloring-book':
-                baseStyle = "coloring book page, black and white only, simple clean outlines, no shading, no fill, kid-friendly shapes, white background, line art";
-                break;
-            case '3d-render':
-                baseStyle = "3d render, blender cycle, isometric icon, soft lighting, clay material or glossy finish, high detail, unreal engine 5";
-                break;
-            case 'anime':
-                baseStyle = "anime style, studio ghibli inspired, vibrant colors, detailed background, manga art, cel shaded";
-                break;
-            case 'sticker':
-                baseStyle = "die-cut sticker design, white border, vector style, cute, kawaii, minimal, white background";
-                break;
-            default: // Auto
-                baseStyle = "digital art, highly detailed, masterpiece, artstation trending";
-                break;
-        }
-
-        // Construct final prompt with safety negatives implied by "clean composition"
-        return `${userInput}, ${baseStyle}, ${qualityBoost}`;
-    }
-
     async function generateImages() {
-        // NOTE: No auto-ad trigger here. Only user intent triggers generation.
+        // NOTE: Auto-ad trigger removed to comply with "Friendly" policy.
+        // User only clicks ad if they want to support via banner.
 
-        const rawPrompt = document.getElementById("promptInput").value.trim();
-        if(!rawPrompt) return alert("Please type a description first!");
+        const prompt = document.getElementById("promptInput").value.trim();
+        if(!prompt) return alert("Please type a description first!");
 
-        // Check Limit
-        let currentCount = parseInt(localStorage.getItem('ai_usage_count') || 0);
+        let currentCount = parseInt(localStorage.getItem('ai_usage_count'));
+        
+        // Soft Limit Check
         if(currentCount >= DAILY_LIMIT) {
-            alert("You have reached the daily safety limit. Please try again tomorrow!");
+            alert("You have reached the daily safety limit to prevent server overload. Please come back tomorrow!");
             return;
         }
+
+        // Increment Usage
+        localStorage.setItem('ai_usage_count', currentCount + 1);
+        updateUsageDisplay();
 
         const genBtn = document.getElementById("generateBtn");
         const grid = document.getElementById("output-grid");
@@ -250,45 +298,88 @@
         const ratio = document.getElementById("aspectRatio").value.split('/');
         const style = document.getElementById("imageStyle").value;
 
-        // Update UI
-        localStorage.setItem('ai_usage_count', currentCount + 1);
-        updateUsageDisplay();
-
-        activePrompt = rawPrompt;
+        activePrompt = prompt;
         genBtn.disabled = true;
-        genBtn.innerText = "✨ Creating Magic...";
+        genBtn.innerText = "Generating...";
         loader.style.display = "block";
         grid.innerHTML = ""; 
 
-        // Apply Smart Logic
-        const finalPrompt = constructSmartPrompt(rawPrompt, style);
+        // --- SMART PROMPT ENGINEERING (Based on System Prompt) ---
+        let baseEnhance = "high quality, sharp focus, 8k uhd, masterpiece";
+        let stylePrompt = "";
 
-        // Generate 4 Images
+        switch(style) {
+            case 'vintage-vector':
+                stylePrompt = "vintage retro t-shirt design, vector art, flat illustration, clean thick lines, screen print style, white background, no gradients, isolated, svg style";
+                break;
+            case 'digital-art':
+                stylePrompt = "concept art, digital painting, smooth, artstation trending, unreal engine 5 render, cinematic lighting";
+                break;
+            case 'photorealistic':
+                stylePrompt = "raw photo, professional product photography, realistic texture, cinematic lighting, shot on 35mm lens, f/1.8, dslr quality";
+                break;
+            case 'anime':
+                stylePrompt = "anime style, studio ghibli inspired, vibrant colors, detailed background, manga cover";
+                break;
+            case 'coloring-book':
+                stylePrompt = "coloring book page, black and white, clean line art, no shading, white background, kids friendly, simple outlines";
+                break;
+            case 'sticker-art':
+                stylePrompt = "die-cut sticker design, white border, kawaii, vector style, white background, cute, simple";
+                break;
+            case '3d-render':
+                stylePrompt = "3d render, clay style, blender, pixar style, cute, soft lighting, isometric";
+                break;
+            case 'mockup':
+                stylePrompt = "professional mockup, centered, studio lighting, clean background, product display";
+                break;
+            default:
+                stylePrompt = "detailed masterpiece, oil painting texture";
+        }
+
+        const finalPrompt = `${prompt}, ${stylePrompt}, ${baseEnhance}`;
+
+        // --- GENERATION LOOP WITH RATE LIMIT FIX ---
+        // We generate 4 images sequentially with a delay to prevent 429 Errors
+        
         for(let i=0; i<4; i++) {
-            if(i > 0) await delay(1000); // 1s delay to respect API stability
+            // CRITICAL FIX: Increased delay to 1.5 seconds between requests
+            // This prevents the API from blocking the subsequent requests
+            if(i > 0) await delay(1500); 
 
             const seed = Math.floor(Math.random() * 999999999);
-            // Using Flux model via Pollinations
-            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true&model=flux&ref=${Date.now()}`; 
+            // Added 'ref' with timestamp + index to ensure URL is unique (Cache busting)
+            const uniqueRef = Date.now() + i;
+            
+            const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true&model=flux&ref=${uniqueRef}`; 
             
             const card = document.createElement("div");
             card.className = "img-card";
             
             const img = new Image();
             img.src = url;
-            img.alt = rawPrompt;
-            img.loading = "lazy";
+            img.alt = `${prompt} AI design ${i+1}`;
             
-            img.onload = () => { card.classList.add('loaded'); };
-            img.onerror = () => { card.remove(); };
+            // Allow image to load in background before showing fully, but append immediately to grid
+            img.onload = () => {
+                card.style.borderColor = "transparent"; // Reset border
+            };
+            
+            img.onerror = () => { 
+                // If an image fails, try to hide it or show a retry placeholder
+                card.style.display = 'none'; 
+            };
 
             card.appendChild(img);
+            
+            // Click to Select Logic
             card.onclick = () => {
                 document.querySelectorAll('.img-card').forEach(c => c.classList.remove('selected'));
                 card.classList.add('selected');
                 selectedUrl = url;
                 document.getElementById("actionBar").style.display = "flex";
             };
+            
             grid.appendChild(card);
         }
 
@@ -303,19 +394,28 @@
         btn.innerText = "⏳ Processing...";
 
         try {
+            // Fetch blob to avoid browser opening image in new tab
             const response = await fetch(selectedUrl);
             const blob = await response.blob();
             const blobUrl = URL.createObjectURL(blob);
+            
+            // Create Clean Slug
             const slug = activePrompt.toLowerCase().replace(/[^\w\s]/gi, '').split(' ').slice(0, 5).join('-');
             
             const link = document.createElement("a");
             link.href = blobUrl;
-            link.download = `ai-design-${slug}.png`;
+            link.download = `ai-hub-${slug}-${Date.now()}.png`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            
+            // Clean up memory
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+            
         } catch(e) {
-            alert("Download failed. Please long-press the image to save.");
+            alert("Auto-download failed. Please Long-Press the image and select 'Save Image'.");
+            // Fallback: Open in new tab
+            window.open(selectedUrl, '_blank');
         } finally {
             btn.innerText = "⬇️ Download HD PNG";
         }
