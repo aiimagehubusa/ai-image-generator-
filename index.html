@@ -15,6 +15,24 @@
     <meta property="og:type" content="website">
     <meta http-equiv="Cache-Control" content="public, max-age=31536000">
 
+    <!-- Schema Markup for Rich Results -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "AI Image Hub",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "description": "Free AI image generator for commercial use, perfect for Etsy sellers and print-on-demand businesses.",
+        "keywords": "AI image generator, free, commercial use, Etsy, t-shirt design"
+    }
+    </script>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
@@ -187,10 +205,10 @@
             
             <div class="controls">
                 <select id="aspectRatio">
-                    <option value="1024/1024">Square (1:1)</option>
-                    <option value="720/1280">Vertical (9:16)</option>
-                    <option value="1280/720">Horizontal (16:9)</option>
-                    <option value="1024/1280">Portrait (4:5)</option>
+                    <option value="1024x1024">Square (1:1)</option>
+                    <option value="720x1280">Vertical (9:16)</option>
+                    <option value="1280x720">Horizontal (16:9)</option>
+                    <option value="1024x1280">Portrait (4:5)</option>
                 </select>
                 <select id="imageStyle">
                     <option value="vintage-vector">★ T-Shirt Vector</option>
@@ -242,16 +260,35 @@
 
     let selectedUrl = "";
     let activePrompt = "";
+    let lastGen = 0; // Abuse protection cooldown tracker
 
     // Function to generate only 1 image to avoid Tier Limit
     function generateImages() {
+        // Abuse protection - 5 second cooldown
+        const now = Date.now();
+        if(now - lastGen < 5000) {
+            alert("Please wait 5 seconds before next generation");
+            return;
+        }
+        lastGen = now;
+
         const prompt = document.getElementById("promptInput").value.trim();
-        if(!prompt) return alert("Please type a description first!");
+        
+        // Prompt length check for better results
+        if(!prompt) {
+            alert("Please type a description first!");
+            return;
+        }
+        
+        if(prompt.length < 10){
+            alert("Try describing more details for better results");
+            return;
+        }
 
         const genBtn = document.getElementById("generateBtn");
         const grid = document.getElementById("output-grid");
         const loader = document.getElementById("loader");
-        const ratio = document.getElementById("aspectRatio").value.split('/');
+        const ratio = document.getElementById("aspectRatio").value.split('x'); // Changed to 'x'
         const style = document.getElementById("imageStyle").value;
 
         activePrompt = prompt;
@@ -335,15 +372,26 @@
 
     async function downloadImage() {
         if(!selectedUrl) return;
+        
         const btn = document.getElementById("dlBtn");
+        const originalText = btn.innerText;
         btn.innerText = "⏳ Saving...";
+        btn.disabled = true;
 
         try {
-            const response = await fetch(selectedUrl);
+            // Try to fetch with CORS mode
+            const response = await fetch(selectedUrl, { mode: 'cors' });
+            if(!response.ok) throw new Error("CORS blocked or network error");
+            
             const blob = await response.blob();
             const blobUrl = URL.createObjectURL(blob);
             
-            const slug = activePrompt.toLowerCase().replace(/[^\w\s]/gi, '').split(' ').slice(0, 5).join('-');
+            // Create filename from prompt
+            const slug = activePrompt.toLowerCase()
+                .replace(/[^\w\s]/gi, '')
+                .split(' ')
+                .slice(0, 5)
+                .join('-') || 'ai-image';
             
             const link = document.createElement("a");
             link.href = blobUrl;
@@ -352,11 +400,16 @@
             link.click();
             document.body.removeChild(link);
             
+            // Clean up
             setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
+            
         } catch(e) {
+            // Fallback: open in new tab
+            console.warn("CORS blocked, using fallback:", e);
             window.open(selectedUrl, '_blank');
         } finally {
-            btn.innerText = "⬇️ Download HD";
+            btn.innerText = originalText;
+            btn.disabled = false;
         }
     }
 
