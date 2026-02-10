@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Optimized SEO Title & Meta (USA Target) -->
-    <title>Free AI Image Generator for Etsy, T-Shirts & POD | No Login Required</title>
+    <title>AI Image Hub USA | Free AI Image Generator for Etsy, T-Shirts & POD</title>
     <meta name="description" content="Generate 8K high-quality AI art for Etsy, Shopify, and Print-on-Demand. Free commercial use AI image creator. No registration, no fees.">
     <meta name="keywords" content="Free AI Image Generator, Etsy AI Art, T-shirt design AI, Print on Demand AI, Copyright free AI images, USA AI tool">
     
     <!-- Open Graph for Viral Social Sharing -->
-    <meta property="og:title" content="Free Global AI Image Hub - 8K Design Tool">
+    <meta property="og:title" content="AI Image Hub USA - Free Global AI Image Hub - 8K Design Tool">
     <meta property="og:description" content="Create viral T-shirt & Etsy designs in seconds for free.">
     <meta property="og:type" content="website">
     <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aiimagehubusa.blogspot.com/">
 
     <!-- Schema Markup for Rich Results -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
-        "name": "AI Image Hub",
+        "name": "AI Image Hub USA",
         "applicationCategory": "DesignApplication",
         "operatingSystem": "Web",
         "offers": {
@@ -61,7 +64,7 @@
 
         /* HERO & INPUT STYLES */
         .hero { text-align: center; padding: 40px 20px; background: radial-gradient(circle at top, #1e1b4b 0%, #0f172a 100%); }
-        .main-container { max-width: 1000px; margin: auto; padding: 0 15px; }
+        .main-container { max-width: 1200px; margin: auto; padding: 0 15px; }
 
         .search-area { background: var(--card-bg); padding: 25px; border-radius: 20px; border: 1px solid #334155; box-shadow: 0 15px 40px rgba(0,0,0,0.4); margin-top: 20px; }
         
@@ -91,7 +94,7 @@
             margin-top: 20px; 
         }
         .controls select { grid-column: span 1; }
-        .controls .gen-btn { grid-column: span 2; } /* Button full width on mobile initially */
+        .controls .gen-btn { grid-column: span 2; }
 
         select, .gen-btn { padding: 12px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; font-size: 14px; width: 100%; }
         select { background: #334155; color: white; outline: none; }
@@ -105,7 +108,174 @@
 
         .limit-info { font-size: 12px; color: var(--text-dim); margin-top: 10px; font-style: italic; }
 
-        /* IMAGE OUTPUT STYLES (CENTERED SINGLE IMAGE) */
+        /* ENHANCED STYLE SELECTION SECTION */
+        .style-section {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            border-radius: 16px;
+            border: 1px solid #334155;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .style-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .style-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .style-title::before {
+            content: "🎨";
+            font-size: 20px;
+        }
+        
+        .style-toggle {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--primary);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .style-toggle:hover {
+            background: rgba(99, 102, 241, 0.25);
+            transform: translateY(-2px);
+        }
+        
+        .style-options {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, margin-top 0.5s ease-out;
+        }
+        
+        .style-options.expanded {
+            max-height: 500px;
+            margin-top: 20px;
+        }
+        
+        .style-option {
+            background: linear-gradient(145deg, #1e293b, #2d3748);
+            border: 2px solid #334155;
+            border-radius: 12px;
+            padding: 18px 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 110px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .style-option::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        
+        .style-option:hover {
+            border-color: var(--primary);
+            color: white;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .style-option:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .style-option.selected {
+            border-color: var(--primary);
+            background: linear-gradient(145deg, rgba(99, 102, 241, 0.2), rgba(168, 85, 247, 0.1));
+            color: white;
+            font-weight: 700;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
+        }
+        
+        .style-option.selected::before {
+            transform: scaleX(1);
+        }
+        
+        .style-icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+            display: block;
+            line-height: 1;
+        }
+        
+        .style-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+            display: block;
+        }
+        
+        .style-desc {
+            font-size: 11px;
+            color: var(--text-dim);
+            line-height: 1.3;
+            display: block;
+        }
+        
+        .custom-style-input {
+            display: none;
+            margin-top: 25px;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .custom-style-input.visible {
+            display: block;
+        }
+        
+        .custom-style-input input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 10px;
+            background: #0f172a;
+            color: white;
+            border: 2px solid #334155;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+        
+        .custom-style-input input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        }
+
+        /* IMAGE OUTPUT STYLES */
         #output-grid { 
             margin-top: 40px; 
             display: flex; 
@@ -121,6 +291,68 @@
         }
         .img-card:hover { transform: scale(1.01); border-color: var(--primary); }
         .img-card img { width: 100%; height: auto; display: block; background: #0f172a; max-height: 600px; object-fit: contain; }
+        
+        /* GALLERY SECTION */
+        #gallerySection {
+            margin-top: 60px;
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #334155;
+        }
+        
+        #gallerySection h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #818cf8, #f43f5e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .clear-btn {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .clear-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(239, 68, 68, 0.3);
+        }
+        
+        #galleryGrid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        #galleryGrid img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid #334155;
+        }
+        
+        #galleryGrid img:hover {
+            transform: scale(1.05);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
         
         /* AD SLOT */
         .ad-slot { 
@@ -146,6 +378,11 @@
         /* LOADER */
         .loader { display: none; width: 40px; height: 40px; border: 4px solid #334155; border-top: 4px solid var(--primary); border-radius: 50%; margin: 20px auto; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* SEO SECTION & FOOTER */
         .seo-section { margin-top: 60px; padding: 30px; background: #111827; border-radius: 20px; border: 1px solid #1e293b; }
@@ -155,11 +392,35 @@
         footer { margin-top: 80px; padding: 40px 20px; background: #020617; border-top: 1px solid #1e293b; text-align: center; }
         .footer-links a { color: var(--text-dim); margin: 0 8px; font-size: 12px; }
 
-        /* RESPONSIVE MEDIA QUERIES */
+        /* RESPONSIVE MEDIA QUERIES - ENHANCED FOR ALL STYLES */
+        @media (min-width: 1200px) {
+            .style-options {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
+        @media (min-width: 900px) and (max-width: 1199px) {
+            .style-options {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+        
         @media (min-width: 600px) {
             .controls { grid-template-columns: repeat(3, 1fr); }
             .controls .gen-btn { grid-column: span 1; }
-            .img-card { max-width: 512px; } /* Constraint width on desktop */
+            .img-card { max-width: 512px; }
+        }
+
+        @media (max-width: 899px) and (min-width: 700px) {
+            .style-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 699px) and (min-width: 500px) {
+            .style-options {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
         @media (max-width: 599px) {
@@ -168,13 +429,71 @@
             .hero { padding: 30px 15px; }
             h1 { font-size: 1.5rem; }
             .seo-section { padding: 20px; }
+            #galleryGrid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            
+            .style-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .style-option {
+                min-height: 95px;
+                padding: 12px 6px;
+            }
+            
+            .style-icon {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+            
+            .style-name {
+                font-size: 12px;
+            }
+            
+            .style-desc {
+                font-size: 10px;
+                display: none; /* Hide description on mobile for cleaner look */
+            }
+        }
+        
+        @media (max-width: 380px) {
+            #galleryGrid { grid-template-columns: 1fr; }
+            .style-options { grid-template-columns: 1fr; }
+            
+            .style-section {
+                padding: 15px;
+            }
+            
+            .style-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .style-toggle {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .style-option {
+                min-height: 85px;
+                padding: 10px 5px;
+            }
+            
+            .style-icon {
+                font-size: 22px;
+                margin-bottom: 6px;
+            }
+            
+            .style-name {
+                font-size: 11px;
+            }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <a href="/" class="logo">AI Image Hub</a>
+    <a href="./index.html" class="logo">AI Image Hub USA</a>
     <nav>
         <a href="#how-it-works">How it Works</a>
         <!-- Safe Partner Link -->
@@ -203,21 +522,75 @@
 
             <textarea id="promptInput" placeholder="Describe your imagination here..."></textarea>
             
+            <!-- ENHANCED STYLE SELECTION SECTION -->
+            <div class="style-section">
+                <div class="style-header">
+                    <div class="style-title">Art Style Selection (Optional)</div>
+                    <button class="style-toggle" id="styleToggle">
+                        <span>Show All Styles</span>
+                        <span>▼</span>
+                    </button>
+                </div>
+                
+                <div class="style-options" id="styleOptions">
+                    <div class="style-option" data-style="none" onclick="selectStyle(this, 'none')">
+                        <span class="style-icon">✨</span>
+                        <span class="style-name">No Style</span>
+                        <span class="style-desc">Pure Prompt Only</span>
+                    </div>
+                    <div class="style-option" data-style="vintage-vector" onclick="selectStyle(this, 'vintage-vector')">
+                        <span class="style-icon">👕</span>
+                        <span class="style-name">T-Shirt Vector</span>
+                        <span class="style-desc">Vintage & Retro Designs</span>
+                    </div>
+                    <div class="style-option" data-style="photorealistic" onclick="selectStyle(this, 'photorealistic')">
+                        <span class="style-icon">📷</span>
+                        <span class="style-name">Photorealistic</span>
+                        <span class="style-desc">DSLR Quality Photos</span>
+                    </div>
+                    <div class="style-option" data-style="digital-art" onclick="selectStyle(this, 'digital-art')">
+                        <span class="style-icon">🎨</span>
+                        <span class="style-name">Digital Art</span>
+                        <span class="style-desc">ArtStation Trending</span>
+                    </div>
+                    <div class="style-option" data-style="coloring-book" onclick="selectStyle(this, 'coloring-book')">
+                        <span class="style-icon">🖍️</span>
+                        <span class="style-name">Coloring Page</span>
+                        <span class="style-desc">Black & White Outlines</span>
+                    </div>
+                    <div class="style-option" data-style="sticker-art" onclick="selectStyle(this, 'sticker-art')">
+                        <span class="style-icon">🏷️</span>
+                        <span class="style-name">Sticker Design</span>
+                        <span class="style-desc">Kawaii & Cute Style</span>
+                    </div>
+                    <div class="style-option" data-style="anime" onclick="selectStyle(this, 'anime')">
+                        <span class="style-icon">🎌</span>
+                        <span class="style-name">Anime Style</span>
+                        <span class="style-desc">Studio Ghibli Inspired</span>
+                    </div>
+                    <div class="style-option" data-style="3d-render" onclick="selectStyle(this, '3d-render')">
+                        <span class="style-icon">🔮</span>
+                        <span class="style-name">3D Cute Icon</span>
+                        <span class="style-desc">Pixar & Blender Style</span>
+                    </div>
+                    <div class="style-option" data-style="custom" onclick="selectStyle(this, 'custom')">
+                        <span class="style-icon">✏️</span>
+                        <span class="style-name">Custom Style</span>
+                        <span class="style-desc">Type Your Own</span>
+                    </div>
+                </div>
+                
+                <div class="custom-style-input" id="customStyleInput">
+                    <input type="text" id="customStyleText" placeholder="Type your custom style (e.g., 'watercolor painting', 'oil on canvas', 'cyberpunk neon', 'minimalist logo')">
+                </div>
+            </div>
+            
             <div class="controls">
                 <select id="aspectRatio">
                     <option value="1024x1024">Square (1:1)</option>
                     <option value="720x1280">Vertical (9:16)</option>
                     <option value="1280x720">Horizontal (16:9)</option>
                     <option value="1024x1280">Portrait (4:5)</option>
-                </select>
-                <select id="imageStyle">
-                    <option value="vintage-vector">★ T-Shirt Vector</option>
-                    <option value="photorealistic">Photorealistic</option>
-                    <option value="digital-art">Digital Art</option>
-                    <option value="coloring-book">Coloring Page</option>
-                    <option value="sticker-art">Sticker Design</option>
-                    <option value="anime">Anime Style</option>
-                    <option value="3d-render">3D Cute Icon</option>
                 </select>
                 <button class="gen-btn" id="generateBtn" onclick="generateImages()">🚀 Generate Art</button>
             </div>
@@ -231,10 +604,21 @@
     <div id="output-grid">
         <!-- Generated Image will appear here -->
     </div>
+    
+    <!-- GALLERY SECTION -->
+    <section id="gallerySection">
+        <h2>🖼️ Generated Image History</h2>
+        
+        <button onclick="clearHistory()" class="clear-btn">
+            Clear History
+        </button>
+        
+        <div id="galleryGrid"></div>
+    </section>
 
     <article class="seo-section" id="how-it-works">
         <h2>How to Generate Commercial AI Art</h2>
-        <p>Our <strong>AI Image Hub</strong> creates high-resolution designs suitable for Print-on-Demand (POD) sellers on Etsy, Redbubble, and Amazon Merch. Select a style, type a prompt, and get a unique image instantly.</p>
+        <p>Our <strong>AI Image Hub USA</strong> creates high-resolution designs suitable for Print-on-Demand (POD) sellers on Etsy, Redbubble, and Amazon Merch. Select a style, type a prompt, and get a unique image instantly.</p>
     </article>
 </div>
 
@@ -245,14 +629,16 @@
 
 <footer>
     <div class="footer-links">
-        <a href="#">Privacy</a> | <a href="#">Terms</a> | <a href="#">Contact</a>
+        <a href="privacy.html">Privacy Policy</a> |
+        <a href="terms.html">Terms</a> |
+        <a href="contact.html">Contact</a>
     </div>
-    <p style="color: #475569; font-size: 12px; margin-top: 10px;">&copy; 2026 AI Image Hub.</p>
+    <p style="color: #475569; font-size: 12px; margin-top: 10px;">&copy; 2026 AI Image Hub USA.</p>
 </footer>
 
 <script>
     // --- PARTNER CONFIG ---
-    const AD_LINK = "https://backstageemergencyblame.com/e9mwu5szk4?key=b2b4c77ab9df726c7e20236b43ad7477";
+    const AD_LINK = "https://amazon.com/";
 
     function openPartnerLink() {
         window.open(AD_LINK, '_blank', 'noopener,noreferrer');
@@ -260,9 +646,107 @@
 
     let selectedUrl = "";
     let activePrompt = "";
-    let lastGen = 0; // Abuse protection cooldown tracker
+    let lastGen = 0;
+    let selectedStyle = "none";
+    let customStyleText = "";
 
-    // Function to generate only 1 image to avoid Tier Limit
+    // Style selection functionality
+    function toggleStyleOptions() {
+        const styleOptions = document.getElementById('styleOptions');
+        const styleToggle = document.getElementById('styleToggle');
+        
+        styleOptions.classList.toggle('expanded');
+        
+        if (styleOptions.classList.contains('expanded')) {
+            styleToggle.innerHTML = '<span>Hide Styles</span> <span>▲</span>';
+        } else {
+            styleToggle.innerHTML = '<span>Show All Styles</span> <span>▼</span>';
+        }
+    }
+
+    function selectStyle(element, styleValue) {
+        // Remove selected class from all style options
+        document.querySelectorAll('.style-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked element
+        element.classList.add('selected');
+        
+        // Set the selected style
+        selectedStyle = styleValue;
+        
+        // Handle custom style input
+        const customStyleInput = document.getElementById('customStyleInput');
+        if (styleValue === 'custom') {
+            customStyleInput.classList.add('visible');
+            document.getElementById('customStyleText').focus();
+        } else {
+            customStyleInput.classList.remove('visible');
+            customStyleText = "";
+        }
+    }
+
+    // Initialize style toggle
+    document.getElementById('styleToggle').addEventListener('click', toggleStyleOptions);
+
+    // Update custom style text when user types
+    document.getElementById('customStyleText').addEventListener('input', function(e) {
+        customStyleText = e.target.value.trim();
+    });
+
+    // Gallery Functions
+    function loadHistory() {
+        let history = JSON.parse(localStorage.getItem("aiHistory")) || [];
+
+        if (history.length === 0) {
+            document.getElementById("galleryGrid").innerHTML =
+                "<p style='color:#94a3b8;'>No images yet. Generate your first AI Art!</p>";
+            return;
+        }
+
+        history.forEach(url => renderGallery(url));
+    }
+
+    function addImageToGallery(url) {
+        let history = JSON.parse(localStorage.getItem("aiHistory")) || [];
+
+        history = history.filter(item => item !== url);
+
+        history.unshift(url);
+
+        if (history.length > 20) history.pop();
+
+        localStorage.setItem("aiHistory", JSON.stringify(history));
+
+        renderGallery(url, true);
+    }
+
+    function renderGallery(url, newest = false) {
+        const grid = document.getElementById("galleryGrid");
+
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "AI Generated Image";
+        img.loading = "lazy";
+
+        img.onclick = () => window.open(url, "_blank");
+
+        if (newest) {
+            grid.prepend(img);
+        } else {
+            grid.appendChild(img);
+        }
+    }
+
+    function clearHistory() {
+        if (confirm("Clear all saved images?")) {
+            localStorage.removeItem("aiHistory");
+            document.getElementById("galleryGrid").innerHTML =
+                "<p style='color:#94a3b8;'>History cleared. Generate new images!</p>";
+        }
+    }
+
     function generateImages() {
         // Abuse protection - 5 second cooldown
         const now = Date.now();
@@ -288,8 +772,7 @@
         const genBtn = document.getElementById("generateBtn");
         const grid = document.getElementById("output-grid");
         const loader = document.getElementById("loader");
-        const ratio = document.getElementById("aspectRatio").value.split('x'); // Changed to 'x'
-        const style = document.getElementById("imageStyle").value;
+        const ratio = document.getElementById("aspectRatio").value.split('x');
 
         activePrompt = prompt;
         genBtn.disabled = true;
@@ -302,38 +785,52 @@
         let baseEnhance = "high quality, sharp focus, 8k uhd, masterpiece";
         let stylePrompt = "";
 
-        switch(style) {
-            case 'vintage-vector':
-                stylePrompt = "vintage retro t-shirt design, vector art, flat illustration, clean thick lines, screen print style, white background, isolated";
-                break;
-            case 'digital-art':
-                stylePrompt = "concept art, digital painting, smooth, artstation trending, cinematic lighting";
-                break;
-            case 'photorealistic':
-                stylePrompt = "raw photo, professional product photography, realistic texture, cinematic lighting, dslr quality";
-                break;
-            case 'anime':
-                stylePrompt = "anime style, studio ghibli inspired, vibrant colors, detailed background";
-                break;
-            case 'coloring-book':
-                stylePrompt = "coloring book page, black and white, clean line art, no shading, white background, simple outlines";
-                break;
-            case 'sticker-art':
-                stylePrompt = "die-cut sticker design, white border, kawaii, vector style, white background";
-                break;
-            case '3d-render':
-                stylePrompt = "3d render, clay style, blender, pixar style, cute, soft lighting, isometric";
-                break;
-            default:
-                stylePrompt = "detailed masterpiece";
+        // If custom style is selected and has text, use it
+        if (selectedStyle === 'custom' && customStyleText) {
+            stylePrompt = customStyleText;
+        } 
+        // Otherwise use predefined styles
+        else if (selectedStyle !== 'none' && selectedStyle !== 'custom') {
+            switch(selectedStyle) {
+                case 'vintage-vector':
+                    stylePrompt = "vintage retro t-shirt design, vector art, flat illustration, clean thick lines, screen print style, white background, isolated";
+                    break;
+                case 'digital-art':
+                    stylePrompt = "concept art, digital painting, smooth, artstation trending, cinematic lighting";
+                    break;
+                case 'photorealistic':
+                    stylePrompt = "raw photo, professional product photography, realistic texture, cinematic lighting, dslr quality";
+                    break;
+                case 'anime':
+                    stylePrompt = "anime style, studio ghibli inspired, vibrant colors, detailed background";
+                    break;
+                case 'coloring-book':
+                    stylePrompt = "coloring book page, black and white, clean line art, no shading, white background, simple outlines";
+                    break;
+                case 'sticker-art':
+                    stylePrompt = "die-cut sticker design, white border, kawaii, vector style, white background";
+                    break;
+                case '3d-render':
+                    stylePrompt = "3d render, clay style, blender, pixar style, cute, soft lighting, isometric";
+                    break;
+                default:
+                    stylePrompt = "";
+            }
         }
 
-        const finalPrompt = `${prompt}, ${stylePrompt}, ${baseEnhance}`;
+        // Build final prompt based on style selection
+        let finalPrompt = prompt;
+        if (stylePrompt) {
+            finalPrompt = `${prompt}, ${stylePrompt}, ${baseEnhance}`;
+        } else if (selectedStyle === 'none') {
+            // For "no style" option, just add base enhancement
+            finalPrompt = `${prompt}, ${baseEnhance}`;
+        }
+
         const seed = Math.floor(Math.random() * 999999999);
         const uniqueRef = Date.now();
         
         // --- SINGLE IMAGE GENERATION (NO LOOP) ---
-        // Generates exactly 1 image to prevent 429 Errors
         const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(finalPrompt)}?seed=${seed}&width=${ratio[0]}&height=${ratio[1]}&nologo=true&model=flux&ref=${uniqueRef}`; 
         
         const card = document.createElement("div");
@@ -347,9 +844,13 @@
             loader.style.display = "none";
             genBtn.disabled = false;
             genBtn.innerText = "🚀 Generate Again";
+            
             // Auto select the single image for convenience
             selectedUrl = url;
             document.getElementById("actionBar").style.display = "flex";
+            
+            // ✅ Save into Gallery History
+            addImageToGallery(url);
         };
         
         img.onerror = () => { 
@@ -371,51 +872,49 @@
     }
 
     async function downloadImage() {
-        if(!selectedUrl) return;
-        
-        const btn = document.getElementById("dlBtn");
-        const originalText = btn.innerText;
-        btn.innerText = "⏳ Saving...";
-        btn.disabled = true;
+        if (!selectedUrl) return;
 
-        try {
-            // Try to fetch with CORS mode
-            const response = await fetch(selectedUrl, { mode: 'cors' });
-            if(!response.ok) throw new Error("CORS blocked or network error");
-            
-            const blob = await response.blob();
-            const blobUrl = URL.createObjectURL(blob);
-            
-            // Create filename from prompt
-            const slug = activePrompt.toLowerCase()
-                .replace(/[^\w\s]/gi, '')
-                .split(' ')
-                .slice(0, 5)
-                .join('-') || 'ai-image';
-            
-            const link = document.createElement("a");
-            link.href = blobUrl;
-            link.download = `ai-art-${slug}-${Date.now()}.png`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Clean up
-            setTimeout(() => URL.revokeObjectURL(blobUrl), 100);
-            
-        } catch(e) {
-            // Fallback: open in new tab
-            console.warn("CORS blocked, using fallback:", e);
-            window.open(selectedUrl, '_blank');
-        } finally {
-            btn.innerText = originalText;
-            btn.disabled = false;
-        }
+        // Best GitHub Working Download
+        window.open(selectedUrl, "_blank");
     }
 
     function deselect() {
         document.getElementById("actionBar").style.display = "none";
     }
+
+    // Load gallery history when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadHistory();
+        
+        // Set default style selection
+        const defaultStyleOption = document.querySelector('.style-option[data-style="none"]');
+        if (defaultStyleOption) {
+            selectStyle(defaultStyleOption, 'none');
+        }
+        
+        // Allow Enter key to generate images
+        document.getElementById('promptInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                generateImages();
+            }
+        });
+        
+        // Allow Enter key in custom style input
+        document.getElementById('customStyleText').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                generateImages();
+            }
+        });
+        
+        // Auto-expand style options on desktop
+        if (window.innerWidth > 768) {
+            setTimeout(() => {
+                toggleStyleOptions();
+            }, 300);
+        }
+    });
 </script>
 </body>
 </html>
